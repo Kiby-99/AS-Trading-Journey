@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>AS Trading Journey</title>
+
+    <!-- Telegram Mini App -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            background:
+                var(--tg-theme-bg-color, #ffffff);
+
+            color:
+                var(--tg-theme-text-color, #000000);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+
+            margin: 20px auto;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 28px;
+            font-weight: bold;
+
+            background: #4f46e5;
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .card {
+            margin-top: 25px;
+            padding: 25px;
+
+            border-radius: 18px;
+
+            background:
+                var(
+                    --tg-theme-secondary-bg-color,
+                    #f2f2f2
+                );
+        }
+
+        button {
+            width: 100%;
+
+            padding: 16px;
+
+            margin-top: 20px;
+
+            border: none;
+            border-radius: 12px;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            background:
+                var(
+                    --tg-theme-button-color,
+                    #2481cc
+                );
+
+            color:
+                var(
+                    --tg-theme-button-text-color,
+                    #ffffff
+                );
+
+            cursor: pointer;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="logo">
+            AS
+        </div>
+
+        <h1>
+            AS Trading Journey
+        </h1>
+
+        <div class="card">
+
+            <h2 id="welcome">
+                Welcome 👋
+            </h2>
+
+            <p id="user">
+                Loading Telegram information...
+            </p>
+
+            <button onclick="openDashboard()">
+                Open Dashboard
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        // Telegram Mini App
+        const tg = window.Telegram.WebApp;
+
+        // Tell Telegram that the app is ready
+        tg.ready();
+
+        // Expand the app
+        tg.expand();
+
+
+        // Get Telegram user
+        const user = tg.initDataUnsafe?.user;
+
+
+        if (user) {
+
+            document.getElementById("welcome").innerText =
+                "Welcome, " +
+                (user.first_name || "Trader") +
+                " 👋";
+
+            document.getElementById("user").innerText =
+                "You are connected through Telegram.";
+
+        } else {
+
+            document.getElementById("welcome").innerText =
+                "Welcome, Trader 👋";
+
+            document.getElementById("user").innerText =
+                "Open this page through Telegram to connect your account.";
+
+        }
+
+
+        function openDashboard() {
+
+            tg.showAlert(
+                "Your AS Trading Journey dashboard is coming soon 🚀"
+            );
+
+        }
+
+    </script>
+
+</body>
+
+</html>
