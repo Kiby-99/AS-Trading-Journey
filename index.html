@@ -1,181 +1,345 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-    <title>AS Trading Journey</title>
+  <title>AS Trading Journey</title>
 
-    <!-- Telegram Mini App -->
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <!-- Telegram Mini App -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        body {
-            margin: 0;
-            padding: 20px;
-            font-family: Arial, sans-serif;
+    body {
+      margin: 0;
+      padding: 24px 18px;
+      font-family: Arial, sans-serif;
+      background: #0d0f0e;
+      color: #ffffff;
+    }
 
-            background:
-                var(--tg-theme-bg-color, #ffffff);
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
 
-            color:
-                var(--tg-theme-text-color, #000000);
-        }
+    .brand {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 35px;
+    }
 
-        .container {
-            max-width: 600px;
-            margin: auto;
-        }
+    .brand-name {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
 
-        .logo {
-            width: 80px;
-            height: 80px;
+    .brand-subtitle {
+      margin-top: 6px;
+      color: #999999;
+      font-size: 13px;
+      letter-spacing: 3px;
+    }
 
-            margin: 30px auto 20px;
+    .logo {
+      width: 58px;
+      height: 58px;
+      border: 1px solid #d6b65c;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d6b65c;
+      font-size: 20px;
+      font-weight: bold;
+    }
 
-            border-radius: 50%;
+    .progress {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 55px;
+    }
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    .progress-bar {
+      height: 6px;
+      flex: 1;
+      border-radius: 10px;
+      background: #333735;
+    }
 
-            font-size: 28px;
-            font-weight: bold;
+    .progress-bar.active {
+      background: #28d7a1;
+    }
 
-            background: #4f46e5;
-            color: white;
-        }
+    .progress-text {
+      margin-left: 12px;
+      color: #999999;
+      font-size: 14px;
+      white-space: nowrap;
+    }
 
-        h1 {
-            text-align: center;
-        }
+    .section-label {
+      color: #9a9d9c;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+    }
 
-        .card {
-            margin-top: 30px;
-            padding: 25px;
+    h1 {
+      margin: 0 0 18px;
+      font-size: 42px;
+      line-height: 1.08;
+    }
 
-            border-radius: 18px;
+    .intro {
+      color: #a9acab;
+      font-size: 18px;
+      line-height: 1.55;
+      margin-bottom: 38px;
+    }
 
-            background:
-                var(
-                    --tg-theme-secondary-bg-color,
-                    #f2f2f2
-                );
-        }
+    .broker-card {
+      border: 1px solid #5d4747;
+      background: #241d1e;
+      border-radius: 26px;
+      padding: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
-        button {
-            width: 100%;
-            padding: 16px;
+    .broker-card:active {
+      transform: scale(0.98);
+    }
 
-            margin-top: 20px;
+    .broker-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
 
-            border: none;
-            border-radius: 12px;
+    .broker-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 17px;
+      border: 1px solid #d36b6b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ff7b7b;
+      font-size: 18px;
+      font-weight: bold;
+    }
 
-            font-size: 16px;
-            font-weight: bold;
+    .broker-name {
+      font-size: 21px;
+      font-weight: bold;
+    }
 
-            background:
-                var(
-                    --tg-theme-button-color,
-                    #2481cc
-                );
+    .broker-description {
+      margin-top: 6px;
+      color: #a9acab;
+      font-size: 15px;
+    }
 
-            color:
-                var(
-                    --tg-theme-button-text-color,
-                    #ffffff
-                );
-        }
-    </style>
+    .arrow {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #ff747c;
+      color: #111111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+    }
+
+    .privacy {
+      margin-top: 28px;
+      padding: 20px;
+      border: 1px solid #165c4b;
+      background: #101b18;
+      border-radius: 20px;
+      color: #aeb7b4;
+      line-height: 1.5;
+      font-size: 15px;
+    }
+
+    .privacy strong {
+      color: #e2e8e5;
+    }
+
+    .privacy-icon {
+      color: #28d7a1;
+      font-size: 22px;
+      margin-right: 10px;
+    }
+
+    .note {
+      margin-top: 30px;
+      color: #999999;
+      font-size: 15px;
+    }
+
+    footer {
+      margin-top: 100px;
+      padding-top: 25px;
+      border-top: 1px solid #202321;
+      text-align: center;
+      color: #777b79;
+    }
+
+    .footer-logo {
+      color: #d6b65c;
+      font-size: 25px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .footer-links {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 36px;
+      }
+
+      .progress-text {
+        font-size: 13px;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
-    <div class="container">
+  <div class="container">
 
-        <div class="logo">
-            AS
+    <!-- AS BRAND -->
+    <div class="brand">
+      <div>
+        <div class="brand-name">AS JOURNEY</div>
+        <div class="brand-subtitle">TRADING JOURNEY</div>
+      </div>
+
+      <div class="logo">AS</div>
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="progress">
+      <div class="progress-bar active"></div>
+      <div class="progress-bar"></div>
+      <div class="progress-bar"></div>
+      <div class="progress-bar"></div>
+
+      <div class="progress-text">01 / 04</div>
+    </div>
+
+    <!-- STEP 01 -->
+    <div class="section-label">
+      YOUR BROKER
+    </div>
+
+    <h1>
+      Where do you trade?
+    </h1>
+
+    <div class="intro">
+      Connect your account to start your journey.
+      It only takes a few minutes.
+    </div>
+
+    <!-- VESTRADO -->
+    <div class="broker-card" onclick="selectVestrado()">
+
+      <div class="broker-left">
+
+        <div class="broker-icon">
+          VS
         </div>
 
-        <h1>
-            AS Trading Journey
-        </h1>
+        <div>
+          <div class="broker-name">
+            Vestrado
+          </div>
 
-        <div class="card">
-
-            <h2 id="welcome">
-                Welcome 👋
-            </h2>
-
-            <p id="user">
-                Loading Telegram information...
-            </p>
-
-            <button onclick="openDashboard()">
-                Open Dashboard
-            </button>
-
+          <div class="broker-description">
+            Your broker. Your next step.
+          </div>
         </div>
+
+      </div>
+
+      <div class="arrow">
+        ›
+      </div>
 
     </div>
 
+    <!-- PRIVACY -->
+    <div class="privacy">
 
-    <script>
+      <span class="privacy-icon">🛡</span>
 
-        // Connect to Telegram
-        const tg = window.Telegram.WebApp;
+      <strong>Your details stay private.</strong>
+      We only use your information to verify your account
+      and Trading Journey eligibility.
 
-        // Tell Telegram the Mini App is ready
-        tg.ready();
+    </div>
 
-        // Expand the Mini App
-        tg.expand();
+    <div class="note">
+      No account yet? We'll guide you through the setup.
+    </div>
 
+    <!-- FOOTER -->
+    <footer>
 
-        // Get Telegram user information
-        const user = tg.initDataUnsafe?.user;
+      <div class="footer-logo">
+        AS
+      </div>
 
+      <div>
+        AS Trading Journey
+      </div>
 
-        if (user) {
+      <div class="footer-links">
+        <span>Privacy</span>
+        <span>Support</span>
+      </div>
 
-            document.getElementById("welcome").innerText =
-                "Welcome, " +
-                (user.first_name || "Trader") +
-                " 👋";
+    </footer>
 
-            document.getElementById("user").innerText =
-                "You are connected through Telegram.";
+  </div>
 
-        } else {
+  <script>
+    const tg = window.Telegram.WebApp;
 
-            document.getElementById("welcome").innerText =
-                "Welcome, Trader 👋";
+    tg.ready();
+    tg.expand();
 
-            document.getElementById("user").innerText =
-                "Open this page through Telegram to connect your account.";
-
-        }
-
-
-        function openDashboard() {
-
-            tg.showAlert(
-                "Your AS Trading Journey dashboard is coming soon 🚀"
-            );
-
-        }
-
-    </script>
+    function selectVestrado() {
+      tg.showAlert("Vestrado selected. Step 02 is coming next.");
+    }
+  </script>
 
 </body>
-
 </html>
