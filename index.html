@@ -5,7 +5,7 @@
 
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
   >
 
   <title>AK Trading Journey</title>
@@ -16,208 +16,599 @@
   <style>
     * {
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
       margin: 0;
-      padding: 24px 18px;
-      font-family: Arial, sans-serif;
-      background: #0d0f0e;
-      color: #ffffff;
+      padding: 0;
+      background: #090909;
+      color: #f5f5f5;
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
     }
 
-    .container {
-      max-width: 600px;
+    button,
+    input {
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 620px;
       margin: 0 auto;
+      min-height: 100vh;
+      padding: 24px 18px 45px;
     }
 
-    .brand {
+    /* =========================
+       HEADER
+    ========================= */
+
+    .brand-header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 35px;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
     }
 
     .brand-name {
-      font-size: 24px;
-      font-weight: 700;
-      letter-spacing: 3px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #f4f4f4;
     }
 
     .brand-subtitle {
-      margin-top: 6px;
-      color: #999999;
-      font-size: 13px;
-      letter-spacing: 3px;
+      font-size: 12px;
+      letter-spacing: 4px;
+      color: #a6a6a6;
     }
-    
-    .ak-logo {
+
+    .brand-logo {
+      width: 68px;
+      height: 68px;
+      object-fit: contain;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* =========================
+       HOME
+    ========================= */
+
+    .welcome-small {
+      color: #999999;
+      font-size: 18px;
+      margin-top: 30px;
+      margin-bottom: 8px;
+    }
+
+    .welcome-title {
+      font-size: clamp(38px, 9vw, 58px);
+      line-height: 1.05;
+      letter-spacing: -2px;
+      font-weight: 800;
+      margin: 0 0 30px;
+      color: #ffffff;
+    }
+
+    /* =========================
+       CARDS
+    ========================= */
+
+    .card {
+      border-radius: 28px;
+      padding: 28px;
+      margin-bottom: 22px;
+      border: 1px solid rgba(212, 174, 76, 0.32);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(27, 30, 27, 0.98),
+          rgba(15, 17, 15, 0.98)
+        );
+    }
+
+    .card-green {
+      border-color: rgba(38, 201, 156, 0.42);
+    }
+
+    .card-gold {
+      border-color: rgba(218, 181, 79, 0.42);
+    }
+
+    .icon-box {
       width: 58px;
       height: 58px;
-      object-fit: contain;
-      border-radius: 50%;   
-    }
-    
-    .progress {
+      border-radius: 17px;
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 55px;
+      justify-content: center;
+      margin-bottom: 25px;
+      font-size: 25px;
+      font-weight: 800;
     }
 
-    .progress-bar {
-      height: 6px;
-      flex: 1;
-      border-radius: 10px;
-      background: #333735;
+    .icon-green {
+      color: #26d3a3;
+      border: 1px solid rgba(38, 211, 163, 0.45);
+      background: rgba(38, 211, 163, 0.08);
     }
 
-    .progress-bar.active {
-      background: #28d7a1;
+    .icon-gold {
+      color: #e1bb5e;
+      border: 1px solid rgba(225, 187, 94, 0.45);
+      background: rgba(225, 187, 94, 0.08);
     }
 
-    .progress-text {
-      margin-left: 12px;
-      color: #999999;
-      font-size: 14px;
-      white-space: nowrap;
+    .icon-red {
+      color: #e56c6c;
+      border: 1px solid rgba(229, 108, 108, 0.4);
+      background: rgba(229, 108, 108, 0.08);
     }
 
-    .section-label {
-      color: #9a9d9c;
-      font-size: 14px;
-      font-weight: bold;
-      letter-spacing: 3px;
-      margin-bottom: 20px;
+    .card-title {
+      font-size: 29px;
+      line-height: 1.15;
+      margin: 0 0 13px;
+      font-weight: 700;
     }
 
-    h1 {
-      margin: 0 0 18px;
-      font-size: 42px;
-      line-height: 1.08;
-    }
-
-    .intro {
-      color: #a9acab;
+    .card-description {
+      color: #a7aaa8;
       font-size: 18px;
       line-height: 1.55;
-      margin-bottom: 38px;
+      margin: 0 0 25px;
     }
 
-    .broker-card {
-      border: 1px solid #5d4747;
-      background: #241d1e;
-      border-radius: 26px;
-      padding: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      transition: 0.2s;
+    /* =========================
+       BUTTONS
+    ========================= */
+
+    .primary-button {
+      width: 100%;
+      border: none;
+      border-radius: 18px;
+      padding: 19px 20px;
+      font-size: 18px;
+      font-weight: 800;
+      color: #06110d;
+      background: linear-gradient(
+        135deg,
+        #25d1a0,
+        #23b98f
+      );
+      transition: transform 0.15s ease;
     }
 
-    .broker-card:active {
+    .primary-button:active {
       transform: scale(0.98);
     }
 
-    .broker-left {
-      display: flex;
-      align-items: center;
-      gap: 18px;
+    .gold-button {
+      width: 100%;
+      border: none;
+      border-radius: 18px;
+      padding: 19px 20px;
+      font-size: 18px;
+      font-weight: 800;
+      color: #211b08;
+      background: linear-gradient(
+        135deg,
+        #f1d477,
+        #dcae3f
+      );
+      transition: transform 0.15s ease;
     }
 
-    .broker-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 17px;
-      border: 1px solid #d36b6b;
+    .gold-button:active {
+      transform: scale(0.98);
+    }
+
+    .outline-button {
+      width: 100%;
+      border: 1px solid rgba(225, 187, 94, 0.55);
+      border-radius: 18px;
+      padding: 18px 20px;
+      font-size: 17px;
+      font-weight: 700;
+      color: #e5c66e;
+      background: transparent;
+      transition: background 0.15s ease;
+    }
+
+    .outline-button:active {
+      background: rgba(225, 187, 94, 0.08);
+    }
+
+    /* =========================
+       STATUS
+    ========================= */
+
+    .status-line {
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #ff7b7b;
+      gap: 12px;
+      color: #aaaaaa;
+      font-size: 16px;
+      margin: 4px 0 30px;
+    }
+
+    .status-check {
+      color: #2bd2a2;
+      font-size: 21px;
+    }
+
+    .status-plus {
+      color: #777777;
+      font-size: 20px;
+    }
+
+    /* =========================
+       LEARNING CARD
+    ========================= */
+
+    .learning-title {
+      font-size: 28px;
+      margin: 0 0 14px;
+      font-weight: 700;
+    }
+
+    .learning-description {
+      color: #a7aaa8;
       font-size: 18px;
-      font-weight: bold;
+      line-height: 1.55;
+      margin-bottom: 24px;
+    }
+
+    /* =========================
+       SECURITY NOTICE
+    ========================= */
+
+    .security-note {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      color: #999999;
+      font-size: 15px;
+      line-height: 1.55;
+      padding: 8px 10px 25px;
+    }
+
+    .security-icon {
+      color: #2bd2a2;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    /* =========================
+       PROGRESS
+    ========================= */
+
+    .progress-area {
+      margin: 8px 0 42px;
+    }
+
+    .progress-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .back-button {
+      width: 58px;
+      height: 58px;
+      border-radius: 17px;
+      border: 1px solid #333b39;
+      background: #151817;
+      color: #aaaaaa;
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+
+    .progress-bars {
+      flex: 1;
+      display: flex;
+      gap: 8px;
+    }
+
+    .progress-bar {
+      height: 7px;
+      border-radius: 10px;
+      flex: 1;
+      background: #343837;
+    }
+
+    .progress-bar.active {
+      background: #2bd2a2;
+    }
+
+    .progress-number {
+      color: #8d8d8d;
+      font-size: 15px;
+      min-width: 52px;
+      text-align: right;
+    }
+
+    /* =========================
+       STEP TEXT
+    ========================= */
+
+    .eyebrow {
+      color: #999f9c;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      margin-bottom: 22px;
+    }
+
+    .step-title {
+      font-size: clamp(40px, 9vw, 58px);
+      line-height: 1.04;
+      letter-spacing: -2px;
+      margin: 0 0 20px;
+      font-weight: 800;
+    }
+
+    .step-title .green {
+      color: #2bd2a2;
+    }
+
+    .step-description {
+      color: #999d9b;
+      font-size: 19px;
+      line-height: 1.55;
+      margin-bottom: 30px;
+    }
+
+    /* =========================
+       BROKER CARD
+    ========================= */
+
+    .broker-card {
+      border-radius: 25px;
+      padding: 25px;
+      border: 1px solid rgba(38, 211, 163, 0.4);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(23, 47, 39, 0.9),
+          rgba(14, 23, 20, 0.96)
+        );
+      margin-bottom: 20px;
+    }
+
+    .broker-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
     }
 
     .broker-name {
-      font-size: 21px;
-      font-weight: bold;
+      font-size: 29px;
+      font-weight: 800;
+      margin-bottom: 6px;
     }
 
-    .broker-description {
-      margin-top: 6px;
-      color: #a9acab;
-      font-size: 15px;
+    .broker-subtitle {
+      color: #a2aaa6;
+      font-size: 16px;
     }
 
-    .arrow {
-      width: 48px;
-      height: 48px;
+    .broker-arrow {
+      width: 54px;
+      height: 54px;
       border-radius: 50%;
-      background: #ff747c;
-      color: #111111;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
+      border: none;
+      background: #29d1a1;
+      color: #07120e;
+      font-size: 27px;
+      font-weight: 700;
+      flex-shrink: 0;
     }
 
-    .privacy {
-      margin-top: 28px;
-      padding: 20px;
-      border: 1px solid #165c4b;
-      background: #101b18;
-      border-radius: 20px;
-      color: #aeb7b4;
-      line-height: 1.5;
+    /* =========================
+       PRIVACY
+    ========================= */
+
+    .privacy-box {
+      border: 1px solid rgba(38, 211, 163, 0.28);
+      background: rgba(22, 31, 27, 0.65);
+      border-radius: 18px;
+      padding: 19px;
+      color: #a2a8a5;
       font-size: 15px;
+      line-height: 1.55;
+      margin-top: 20px;
     }
 
-    .privacy strong {
-      color: #e2e8e5;
+    .privacy-box strong {
+      color: #e5e7e6;
     }
 
-    .privacy-icon {
-      color: #28d7a1;
-      font-size: 22px;
-      margin-right: 10px;
+    /* =========================
+       ACCOUNT OPTIONS
+    ========================= */
+
+    .option-card {
+      border-radius: 26px;
+      padding: 27px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(38, 211, 163, 0.4);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(20, 45, 37, 0.95),
+          rgba(14, 20, 18, 0.98)
+        );
+      position: relative;
     }
 
-    .note {
-      margin-top: 30px;
-      color: #999999;
-      font-size: 15px;
+    .option-card.existing {
+      border-color: rgba(225, 187, 94, 0.45);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(52, 45, 28, 0.92),
+          rgba(24, 22, 16, 0.98)
+        );
     }
 
-    footer {
-      margin-top: 100px;
-      padding-top: 25px;
-      border-top: 1px solid #202321;
+    .option-label {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 25px;
+    }
+
+    .label-new {
+      background: #29d1a1;
+      color: #07120e;
+    }
+
+    .label-existing {
+      background: #e7c567;
+      color: #211b08;
+    }
+
+    .option-title {
+      font-size: 25px;
+      font-weight: 750;
+      margin: 0 0 12px;
+    }
+
+    .option-description {
+      color: #a3a7a5;
+      font-size: 17px;
+      line-height: 1.55;
+      margin: 0 45px 20px 0;
+    }
+
+    .option-arrow {
+      position: absolute;
+      right: 24px;
+      bottom: 27px;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      border: none;
+      font-size: 27px;
+      font-weight: 700;
+    }
+
+    .option-new-arrow {
+      background: #29d1a1;
+      color: #07120e;
+    }
+
+    .option-existing-arrow {
+      background: #e7c567;
+      color: #211b08;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    .footer {
+      border-top: 1px solid #1c1d1c;
+      margin-top: 35px;
+      padding-top: 30px;
       text-align: center;
       color: #777b79;
     }
 
     .footer-logo {
-      color: #d6b65c;
-      font-size: 25px;
-      font-weight: bold;
-      margin-bottom: 12px;
+      font-family: Georgia, serif;
+      color: #d8b866;
+      font-size: 34px;
+      margin-bottom: 13px;
+    }
+
+    .footer-name {
+      font-size: 14px;
+      margin-bottom: 25px;
     }
 
     .footer-links {
-      margin-top: 25px;
       display: flex;
       justify-content: center;
-      gap: 25px;
+      gap: 28px;
       font-size: 14px;
     }
 
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 36px;
+    .footer-links span {
+      color: #8a8e8c;
+    }
+
+    /* =========================
+       HIDDEN SCREENS
+    ========================= */
+
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    /* =========================
+       SMALL PHONES
+    ========================= */
+
+    @media (max-width: 390px) {
+
+      .app {
+        padding-left: 15px;
+        padding-right: 15px;
       }
 
-      .progress-text {
+      .brand-name {
+        font-size: 19px;
+      }
+
+      .brand-logo {
+        width: 58px;
+        height: 58px;
+      }
+
+      .card,
+      .option-card,
+      .broker-card {
+        padding: 22px;
+      }
+
+      .card-title {
+        font-size: 25px;
+      }
+
+      .step-title {
+        font-size: 39px;
+      }
+
+      .progress-number {
+        min-width: 43px;
         font-size: 13px;
       }
     }
@@ -226,113 +617,566 @@
 
 <body>
 
-  <div class="container">
+  <div class="app">
 
-    <!-- AK BRAND -->
-    <div class="brand">
-      <div>
-        <div class="brand-name">AK JOURNEY</div>
-        <div class="brand-subtitle">TRADING JOURNEY</div>
+    <!-- =====================================
+         SCREEN 0 — MAIN PAGE
+    ====================================== -->
+
+    <section id="homeScreen" class="screen active">
+
+      <div class="brand-header">
+
+        <div class="brand-text">
+          <div class="brand-name">AK TRADING JOURNEY</div>
+          <div class="brand-subtitle">TRADING JOURNEY</div>
+        </div>
+
+        <img
+          src="AKlogo.png"
+          alt="AK Trading Journey"
+          class="brand-logo"
+        >
+
       </div>
 
-      <img src="AKlogo.png" class="ak-logo" alt="AK Trading Journey">
-    </div>
+      <div class="welcome-small">
+        Welcome to your next chapter
+      </div>
 
-    <!-- PROGRESS -->
-    <div class="progress">
-      <div class="progress-bar active"></div>
-      <div class="progress-bar"></div>
-      <div class="progress-bar"></div>
-      <div class="progress-bar"></div>
+      <h1 class="welcome-title">
+        Your journey starts here.
+      </h1>
 
-      <div class="progress-text">01 / 04</div>
-    </div>
 
-    <!-- STEP 01 -->
-    <div class="section-label">
-      YOUR BROKER
-    </div>
+      <!-- CONNECT ACCOUNT -->
 
-    <h1>
-      Where do you trade?
-    </h1>
+      <div class="card card-green">
 
-    <div class="intro">
-      Connect your account to start your journey.
-      It only takes a few minutes.
-    </div>
+        <div class="icon-box icon-green">
+          V
+        </div>
 
-    <!-- VESTRADO -->
-    <div class="broker-card" onclick="selectVestrado()">
+        <h2 class="card-title">
+          Connect your Vestrado account
+        </h2>
 
-      <div class="broker-left">
+        <p class="card-description">
+          Connect your account and complete the verification process
+          to continue your AK Trading Journey.
+        </p>
 
-        <div class="broker-icon">
-          VS
+        <button
+          class="primary-button"
+          onclick="goToStep(1)"
+        >
+          Connect my account&nbsp; →
+        </button>
+
+      </div>
+
+
+      <!-- STATUS -->
+
+      <div class="status-line">
+        <span class="status-check">♢</span>
+        <span>Account verification</span>
+        <span class="status-plus">+</span>
+        <span>Trading Journey access</span>
+      </div>
+
+
+      <!-- ACCESS -->
+
+      <div class="card card-gold">
+
+        <div class="icon-box icon-gold">
+          ♧
+        </div>
+
+        <h2 class="card-title">
+          Your Trading Journey access is waiting.
+        </h2>
+
+        <p class="card-description">
+          Connect your account, complete the required steps,
+          and continue your journey with AK.
+        </p>
+
+        <button
+          class="gold-button"
+          onclick="goToStep(1)"
+        >
+          Continue setup&nbsp; →
+        </button>
+
+      </div>
+
+
+      <!-- LEARNING -->
+
+      <div class="card">
+
+        <div class="icon-box icon-gold">
+          ◫
+        </div>
+
+        <h2 class="learning-title">
+          Your learning path
+        </h2>
+
+        <p class="learning-description">
+          Trading lessons, guided practice and your progress
+          will become available as you move through your journey.
+        </p>
+
+        <button
+          class="outline-button"
+          onclick="showLearningMessage()"
+        >
+          View learning access&nbsp; →
+        </button>
+
+      </div>
+
+
+      <!-- SECURITY -->
+
+      <div class="security-note">
+
+        <div class="security-icon">
+          ♢
         </div>
 
         <div>
-          <div class="broker-name">
-            Vestrado
-          </div>
-
-          <div class="broker-description">
-            Your broker. Your next step.
-          </div>
+          <strong>Your details stay private.</strong>
+          We will never ask for your Vestrado trading password.
         </div>
 
       </div>
 
-      <div class="arrow">
-        ›
+
+      <!-- FOOTER -->
+
+      <footer class="footer">
+
+        <div class="footer-logo">
+          AK
+        </div>
+
+        <div class="footer-name">
+          AK Trading Journey
+        </div>
+
+        <div class="footer-links">
+          <span>Privacy</span>
+          <span>Support</span>
+          <span>Owner console</span>
+        </div>
+
+      </footer>
+
+    </section>
+
+
+    <!-- =====================================
+         SCREEN 1 — STEP 01
+         YOUR BROKER
+    ====================================== -->
+
+    <section id="step1Screen" class="screen">
+
+      <div class="brand-header">
+
+        <div class="brand-text">
+          <div class="brand-name">AK TRADING JOURNEY</div>
+          <div class="brand-subtitle">TRADING JOURNEY</div>
+        </div>
+
+        <img
+          src="AKlogo.png"
+          alt="AK Trading Journey"
+          class="brand-logo"
+        >
+
       </div>
 
-    </div>
 
-    <!-- PRIVACY -->
-    <div class="privacy">
+      <div class="progress-area">
 
-      <span class="privacy-icon">🛡</span>
+        <div class="progress-top">
 
-      <strong>Your details stay private.</strong>
-      We only use your information to verify your account
-      and Trading Journey eligibility.
+          <button
+            class="back-button"
+            onclick="goHome()"
+            aria-label="Back"
+          >
+            ←
+          </button>
 
-    </div>
+          <div class="progress-bars">
 
-    <div class="note">
-      No account yet? We'll guide you through the setup.
-    </div>
+            <div class="progress-bar active"></div>
+            <div class="progress-bar"></div>
+            <div class="progress-bar"></div>
+            <div class="progress-bar"></div>
 
-    <!-- FOOTER -->
-    <footer>
+          </div>
 
-      <div class="footer-logo">
-        AS
+          <div class="progress-number">
+            01 / 04
+          </div>
+
+        </div>
+
       </div>
 
-      <div>
-        AK Trading Journey
+
+      <div class="eyebrow">
+        YOUR BROKER
       </div>
 
-      <div class="footer-links">
-        <span>Privacy</span>
-        <span>Support</span>
+      <h1 class="step-title">
+        Where do you<br>
+        <span class="green">trade?</span>
+      </h1>
+
+      <p class="step-description">
+        Connect your account to start your journey.
+        It only takes a few minutes.
+      </p>
+
+
+      <!-- VESTRADO -->
+
+      <div class="broker-card">
+
+        <div class="broker-row">
+
+          <div>
+            <div class="broker-name">
+              Vestrado
+            </div>
+
+            <div class="broker-subtitle">
+              Your broker. Your next step.
+            </div>
+          </div>
+
+          <button
+            class="broker-arrow"
+            onclick="goToStep(2)"
+          >
+            →
+          </button>
+
+        </div>
+
       </div>
 
-    </footer>
+
+      <div class="privacy-box">
+
+        <strong>Your details stay private.</strong>
+        We only use the information you provide
+        for your AK Trading Journey setup and verification.
+
+      </div>
+
+
+      <div class="privacy-box">
+
+        <strong>No account yet?</strong>
+        We'll guide you through the setup.
+
+      </div>
+
+
+      <footer class="footer">
+
+        <div class="footer-logo">
+          AK
+        </div>
+
+        <div class="footer-name">
+          AK Trading Journey
+        </div>
+
+        <div class="footer-links">
+          <span>Privacy</span>
+          <span>Support</span>
+          <span>Owner console</span>
+        </div>
+
+      </footer>
+
+    </section>
+
+
+    <!-- =====================================
+         SCREEN 2 — STEP 02
+         ACCOUNT TYPE
+    ====================================== -->
+
+    <section id="step2Screen" class="screen">
+
+      <div class="brand-header">
+
+        <div class="brand-text">
+          <div class="brand-name">AK TRADING JOURNEY</div>
+          <div class="brand-subtitle">TRADING JOURNEY</div>
+        </div>
+
+        <img
+          src="AKlogo.png"
+          alt="AK Trading Journey"
+          class="brand-logo"
+        >
+
+      </div>
+
+
+      <div class="progress-area">
+
+        <div class="progress-top">
+
+          <button
+            class="back-button"
+            onclick="goToStep(1)"
+            aria-label="Back"
+          >
+            ←
+          </button>
+
+          <div class="progress-bars">
+
+            <div class="progress-bar active"></div>
+            <div class="progress-bar active"></div>
+            <div class="progress-bar"></div>
+            <div class="progress-bar"></div>
+
+          </div>
+
+          <div class="progress-number">
+            02 / 04
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="eyebrow">
+        YOUR SETUP
+      </div>
+
+      <h1 class="step-title">
+        Get set up<br>
+        with <span class="green">Vestrado</span>
+      </h1>
+
+      <p class="step-description">
+        Two ways in. Pick the one that fits you.
+      </p>
+
+
+      <!-- NEW ACCOUNT -->
+
+      <div class="option-card">
+
+        <div class="option-label label-new">
+          NEW ACCOUNT
+        </div>
+
+        <h2 class="option-title">
+          Create a new account
+        </h2>
+
+        <p class="option-description">
+          Open a Vestrado account and start your
+          AK Trading Journey from the beginning.
+        </p>
+
+        <button
+          class="option-arrow option-new-arrow"
+          onclick="newAccount()"
+          aria-label="Create new account"
+        >
+          →
+        </button>
+
+      </div>
+
+
+      <!-- EXISTING ACCOUNT -->
+
+      <div class="option-card existing">
+
+        <div class="option-label label-existing">
+          EXISTING ACCOUNT
+        </div>
+
+        <h2 class="option-title">
+          I already have an account
+        </h2>
+
+        <p class="option-description">
+          Already trading with Vestrado?
+          Continue by linking your existing account.
+        </p>
+
+        <button
+          class="option-arrow option-existing-arrow"
+          onclick="existingAccount()"
+          aria-label="Existing account"
+        >
+          →
+        </button>
+
+      </div>
+
+
+      <div class="privacy-box">
+
+        <strong>Your details stay private.</strong>
+        We will never ask for your Vestrado
+        trading password.
+
+      </div>
+
+
+      <footer class="footer">
+
+        <div class="footer-logo">
+          AK
+        </div>
+
+        <div class="footer-name">
+          AK Trading Journey
+        </div>
+
+        <div class="footer-links">
+          <span>Privacy</span>
+          <span>Support</span>
+          <span>Owner console</span>
+        </div>
+
+      </footer>
+
+    </section>
 
   </div>
 
+
+  <!-- =====================================
+       JAVASCRIPT
+  ====================================== -->
+
   <script>
-    const tg = window.Telegram.WebApp;
 
-    tg.ready();
-    tg.expand();
+    /* Telegram */
 
-    function selectVestrado() {
-      tg.showAlert("Vestrado selected. Step 02 is coming next.");
+    const tg = window.Telegram?.WebApp;
+
+    if (tg) {
+      tg.ready();
+      tg.expand();
     }
+
+
+    /* =========================
+       SCREEN NAVIGATION
+    ========================= */
+
+    function hideAllScreens() {
+
+      document
+        .querySelectorAll(".screen")
+        .forEach(function(screen) {
+          screen.classList.remove("active");
+        });
+
+    }
+
+
+    function goHome() {
+
+      hideAllScreens();
+
+      document
+        .getElementById("homeScreen")
+        .classList.add("active");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    function goToStep(step) {
+
+      hideAllScreens();
+
+      if (step === 1) {
+
+        document
+          .getElementById("step1Screen")
+          .classList.add("active");
+
+      }
+
+      if (step === 2) {
+
+        document
+          .getElementById("step2Screen")
+          .classList.add("active");
+
+      }
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    /* =========================
+       STEP 02 BUTTONS
+    ========================= */
+
+    function newAccount() {
+
+      alert(
+        "New account setup will be added next."
+      );
+
+    }
+
+
+    function existingAccount() {
+
+      alert(
+        "Existing account setup will be added next."
+      );
+
+    }
+
+
+    /* =========================
+       LEARNING BUTTON
+    ========================= */
+
+    function showLearningMessage() {
+
+      alert(
+        "Your learning path will be available as your AK Trading Journey progresses."
+      );
+
+    }
+
   </script>
 
 </body>
