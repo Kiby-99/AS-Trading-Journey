@@ -2,13 +2,10 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>AS Trading Journey</title>
 
@@ -16,7 +13,6 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
     <style>
-
         * {
             box-sizing: border-box;
         }
@@ -24,10 +20,7 @@
         body {
             margin: 0;
             padding: 20px;
-
-            font-family:
-                Arial,
-                sans-serif;
+            font-family: Arial, sans-serif;
 
             background:
                 var(--tg-theme-bg-color, #ffffff);
@@ -38,14 +31,14 @@
 
         .container {
             max-width: 600px;
-            margin: 0 auto;
+            margin: auto;
         }
 
         .logo {
             width: 80px;
             height: 80px;
 
-            margin: 20px auto;
+            margin: 30px auto 20px;
 
             border-radius: 50%;
 
@@ -65,7 +58,7 @@
         }
 
         .card {
-            margin-top: 25px;
+            margin-top: 30px;
             padding: 25px;
 
             border-radius: 18px;
@@ -79,7 +72,6 @@
 
         button {
             width: 100%;
-
             padding: 16px;
 
             margin-top: 20px;
@@ -101,13 +93,10 @@
                     --tg-theme-button-text-color,
                     #ffffff
                 );
-
-            cursor: pointer;
         }
-
     </style>
-
 </head>
+
 
 <body>
 
@@ -142,17 +131,17 @@
 
     <script>
 
-        // Telegram Mini App
+        // Connect to Telegram
         const tg = window.Telegram.WebApp;
 
-        // Tell Telegram that the app is ready
+        // Tell Telegram the Mini App is ready
         tg.ready();
 
-        // Expand the app
+        // Expand the Mini App
         tg.expand();
 
 
-        // Get Telegram user
+        // Get Telegram user information
         const user = tg.initDataUnsafe?.user;
 
 
