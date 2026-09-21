@@ -534,6 +534,99 @@
       .journey-status { font-size: 11px; gap: 7px; }
     }
 
+  
+    /* Learning path */
+    .learning-nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin: 5px 0 31px;
+    }
+
+    .learning-nav-label,
+    .learning-eyebrow {
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+    }
+
+    .learning-eyebrow { margin-bottom: 13px; }
+
+    .learning-page-title {
+      margin: 0 0 12px;
+      color: #fff;
+      font-size: clamp(29px, 7vw, 38px);
+      font-weight: 750;
+      letter-spacing: -1.4px;
+      line-height: 1.08;
+    }
+
+    .learning-page-intro {
+      max-width: 390px;
+      margin: 0 0 25px;
+      color: #c4c8c4;
+      font-size: 15px;
+      line-height: 1.48;
+    }
+
+    .member-lock-card {
+      padding: 27px 20px 24px;
+      border: 1px solid #3d5146;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #14201b, #101713);
+      color: var(--text);
+    }
+
+    .learning-lock {
+      position: relative;
+      display: inline-block;
+      width: 23px;
+      height: 18px;
+      margin: 5px 0 25px 3px;
+      border: 2px solid #d8b65f;
+      border-radius: 3px;
+    }
+
+    .learning-lock::before {
+      position: absolute;
+      content: "";
+      width: 12px;
+      height: 11px;
+      left: 3px;
+      top: -13px;
+      border: 2px solid #d8b65f;
+      border-bottom: 0;
+      border-radius: 9px 9px 0 0;
+    }
+
+    .member-lock-card h2 {
+      margin: 0 0 13px;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .member-lock-card p {
+      margin: 0 0 14px;
+      color: #c3c8c3;
+      font-size: 15px;
+      line-height: 1.52;
+    }
+
+    .member-lock-card p:last-child { margin-bottom: 0; }
+
+    .learning-footer { margin-top: 52px; }
+
+    @media (max-width: 390px) {
+      .learning-nav { margin-bottom: 27px; gap: 17px; }
+      .learning-page-title { font-size: 31px; }
+      .learning-page-intro { font-size: 14px; }
+      .member-lock-card { padding: 25px 18px 22px; }
+      .member-lock-card h2 { font-size: 19px; }
+      .member-lock-card p { font-size: 14px; }
+    }
+
   </style>
 </head>
 
@@ -980,6 +1073,74 @@
 
     </section>
 
+
+    <!-- =====================================
+         LEARNING PATH
+    ====================================== -->
+
+    <section id="learningScreen" class="screen">
+
+      <div class="brand-header">
+        <div class="brand-text">
+          <div class="brand-name">AK MOVEMENT</div>
+          <div class="brand-subtitle">TRADING JOURNEY</div>
+        </div>
+
+        <img
+          src="AKlogo.png"
+          alt="AK Movement"
+          class="brand-logo"
+        >
+      </div>
+
+      <div class="learning-nav">
+        <button
+          class="back-button"
+          onclick="goHome()"
+          aria-label="Back to home"
+        >
+          ←
+        </button>
+
+        <div class="learning-nav-label">LEARNING PATH</div>
+      </div>
+
+      <div class="learning-eyebrow">TRADING CIRCLE</div>
+
+      <h1 class="learning-page-title">Your learning path.</h1>
+
+      <p class="learning-page-intro">
+        Watch the video, pass its quiz, then practise on your own chart to open the next lesson.
+      </p>
+
+      <section class="member-lock-card" aria-label="Member approval required">
+        <span class="learning-lock" aria-hidden="true"></span>
+
+        <h2>Available to approved members.</h2>
+
+        <p>
+          Your account and at least US$300 in completed deposits must be verified before lessons and practice open.
+        </p>
+
+        <p>
+          Once approved, return here to begin your first lesson.
+        </p>
+      </section>
+
+      <footer class="footer learning-footer">
+        <div class="footer-logo">AK</div>
+
+        <div class="footer-name">AK Movement Trading Journey</div>
+
+        <div class="footer-links">
+          <span>Privacy</span>
+          <span>Support</span>
+          <span>Owner console</span>
+        </div>
+      </footer>
+
+    </section>
+
   </div>
 
 
@@ -1086,9 +1247,16 @@
 
     function showLearningMessage() {
 
-      alert(
-        "Your learning path will be available as your AK Trading Journey progresses."
-      );
+      hideAllScreens();
+
+      document
+        .getElementById("learningScreen")
+        .classList.add("active");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
 
     }
 
