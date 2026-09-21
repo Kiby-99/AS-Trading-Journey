@@ -403,6 +403,137 @@
       .progress-number { min-width: 41px; font-size: 12px; }
       .footer-links { gap: 16px; }
     }
+  
+    /* Main journey cards — compact, financial-style panels */
+    .primary-journey-card {
+      padding: 22px 24px;
+      border-color: #4c675f;
+      border-radius: 19px;
+      background: linear-gradient(145deg, #14201d 0%, #0d1412 100%);
+      box-shadow: none;
+    }
+
+    .primary-journey-card .card-title {
+      margin-bottom: 9px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .primary-journey-card .card-description {
+      max-width: 330px;
+      margin-bottom: 17px;
+      color: #b1bab5;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .broker-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      margin-bottom: 22px;
+      border: 1px solid #705047;
+      border-radius: 10px;
+      background: rgba(212, 175, 90, 0.06);
+      color: #dfbd67;
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .primary-journey-card .primary-button,
+    .unlock-journey-card .gold-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 49px;
+      border-radius: 13px;
+      font-size: 14px;
+      letter-spacing: 0;
+    }
+
+    .button-arrow {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 0;
+    }
+
+    .journey-status {
+      margin: 18px 0 26px;
+      font-size: 12px;
+      gap: 9px;
+    }
+
+    .journey-status .status-check {
+      font-size: 16px;
+    }
+
+    .unlock-journey-card {
+      padding: 21px 20px 19px;
+      border-color: #4b4634;
+      border-radius: 19px;
+      background: linear-gradient(145deg, #1a1a15 0%, #11110f 100%);
+      box-shadow: none;
+    }
+
+    .unlock-card-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 10px;
+    }
+
+    .unlock-card-title .card-title {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 750;
+      line-height: 1.25;
+    }
+
+    .unlock-journey-card .card-description {
+      margin: 0 0 18px;
+      color: #aeb0aa;
+      font-size: 13px;
+    }
+
+    .lock-mark,
+    .button-lock {
+      position: relative;
+      display: inline-block;
+      flex: 0 0 auto;
+      width: 12px;
+      height: 10px;
+      border: 1.5px solid #d8b65f;
+      border-radius: 2px;
+    }
+
+    .lock-mark::before,
+    .button-lock::before {
+      position: absolute;
+      content: "";
+      width: 7px;
+      height: 6px;
+      left: 1px;
+      top: -7px;
+      border: 1.5px solid currentColor;
+      border-bottom: 0;
+      border-radius: 6px 6px 0 0;
+    }
+
+    .lock-mark { margin: 3px 0 0 2px; color: #d8b65f; }
+    .button-lock { width: 11px; height: 9px; color: #211b08; border-color: #211b08; }
+    .button-lock::before { width: 6px; height: 5px; left: 1px; top: -6px; }
+
+    @media (max-width: 390px) {
+      .primary-journey-card { padding: 19px 18px; }
+      .unlock-journey-card { padding: 19px 17px 17px; }
+      .primary-journey-card .card-title { font-size: 18px; }
+      .journey-status { font-size: 11px; gap: 7px; }
+    }
+
   </style>
 </head>
 
@@ -442,11 +573,9 @@
 
       <!-- CONNECT ACCOUNT -->
 
-      <div class="card card-green">
+      <div class="card primary-journey-card">
 
-        <div class="icon-box icon-green">
-          V
-        </div>
+        <div class="broker-mark" aria-hidden="true">V</div>
 
         <h2 class="card-title">
           Connect your Vestrado account
@@ -460,7 +589,7 @@
           class="primary-button"
           onclick="goToStep(1)"
         >
-          Connect my account&nbsp; →
+          Connect my account <span class="button-arrow" aria-hidden="true">→</span>
         </button>
 
       </div>
@@ -468,7 +597,7 @@
 
       <!-- STATUS -->
 
-      <div class="status-line">
+      <div class="status-line journey-status">
         <span class="status-check">♢</span>
         <span>Account verified</span>
         <span class="status-plus">+</span>
@@ -478,26 +607,22 @@
 
       <!-- ACCESS -->
 
-      <div class="card card-gold">
+      <div class="card unlock-journey-card">
 
-        <div class="icon-box icon-gold">
-          🔒
+        <div class="unlock-card-title">
+          <span class="lock-mark" aria-hidden="true"></span>
+          <h2 class="card-title">Unlock Journey with AK</h2>
         </div>
 
-        <h2 class="card-title">
-          Unlock Journey with AK 🔒
-        </h2>
-
         <p class="card-description">
-          Connect your account, complete the required steps,
-          and continue your journey with AK.
+          Connect, verify, and deposit US$300 to unlock your Trading Journey Circle.
         </p>
 
         <button
           class="gold-button"
           onclick="goToStep(1)"
         >
-          Continue setup&nbsp; →
+          Unlock Journey access <span class="button-lock" aria-hidden="true"></span>
         </button>
 
       </div>
