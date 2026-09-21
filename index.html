@@ -726,6 +726,7 @@
     .account-footer { margin-top: 36px; }
 
     .compact-header { margin-bottom: 17px; }
+    .account-guide-outer-progress { margin: 2px 0 18px; }
     .guide-top-actions { margin-bottom: 21px; }
     .guide-open-button { min-height: 45px; font-size: 13px; }
     .guide-change-card { margin-top: 10px; }
@@ -1460,6 +1461,19 @@
         <img src="AKlogo.png" alt="AK Movement" class="brand-logo">
       </div>
 
+      <div class="progress-area account-guide-outer-progress">
+        <div class="progress-top">
+          <button class="back-button" onclick="goToStep(2)" aria-label="Back">←</button>
+          <div class="progress-bars">
+            <div class="progress-bar active"></div>
+            <div class="progress-bar active"></div>
+            <div class="progress-bar active"></div>
+            <div class="progress-bar"></div>
+          </div>
+          <div class="progress-number">03 / 04</div>
+        </div>
+      </div>
+
       <div class="guide-top-actions">
         <button class="vestrado-open-button guide-open-button" onclick="openVestrado()">Open Vestrado <span aria-hidden="true">↗</span></button>
         <button class="account-change-card guide-change-card" onclick="showGuide(4)">
@@ -1609,9 +1623,7 @@
     ========================= */
 
     function newAccount() {
-      hideAllScreens();
-      document.getElementById("createAccountScreen").classList.add("active");
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      showGuide(1);
     }
 
 
