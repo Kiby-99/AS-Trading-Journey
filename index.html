@@ -932,6 +932,23 @@
     .resource-link .resource-diamond { color: var(--gold-bright); font-size: 12px; }
     .resource-link:active { background: #211f17; transform: scale(.99); }
 
+  
+    .account-action-mark {
+      color: #17130b;
+      font-size: 12px;
+      line-height: 1;
+    }
+    .existing-account-card {
+      margin: 24px 0 14px;
+      padding: 19px;
+      border: 1px solid #4b4634;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #1a1a15, #11110f);
+    }
+    .existing-account-card h2 { margin: 0 0 8px; color: #fff; font-size: 20px; }
+    .existing-account-card p { margin: 0 0 16px; color: #c3c8c3; font-size: 14px; line-height: 1.45; }
+    .existing-account-card .account-change-card { margin-top: 0; }
+
   </style>
 </head>
 
@@ -1503,16 +1520,59 @@
       </section>
 
       <button class="vestrado-open-button" onclick="openVestrado()">
-        Open Vestrado <span aria-hidden="true">↗</span>
-      </button>
-
-      <button class="account-change-card" onclick="showGuide(4)">
-        <span class="account-change-icon" aria-hidden="true">✉</span>
-        <span><small>Already have Vestrado?</small><strong>Request an IB change</strong></span>
-        <span class="account-change-arrow" aria-hidden="true">›</span>
+        Open Account Vestrado <span class="account-action-mark" aria-hidden="true">◆</span>
       </button>
 
       <div class="ib-confirmation">◇ Confirm your account is under AK Movement's IB <strong>125579</strong>.</div>
+
+      <footer class="footer account-footer">
+        <div class="footer-logo">AK</div>
+        <div class="footer-name">AK Movement Trading Journey</div>
+        <div class="footer-links"><span>Privacy</span><span>Support</span><span>Owner console</span></div>
+      </footer>
+    </section>
+
+
+    <!-- =====================================
+         EXISTING VESTRADO ACCOUNT
+    ====================================== -->
+    <section id="existingAccountScreen" class="screen">
+      <div class="brand-header">
+        <div class="brand-text">
+          <div class="brand-name">AK MOVEMENT</div>
+          <div class="brand-subtitle">TRADING JOURNEY</div>
+        </div>
+        <img src="AKlogo.png" alt="AK Movement" class="brand-logo">
+      </div>
+
+      <div class="progress-area">
+        <div class="progress-top">
+          <button class="back-button" onclick="goToStep(2)" aria-label="Back">←</button>
+          <div class="progress-bars">
+            <div class="progress-bar active"></div>
+            <div class="progress-bar active"></div>
+            <div class="progress-bar active"></div>
+            <div class="progress-bar"></div>
+          </div>
+          <div class="progress-number">03 / 04</div>
+        </div>
+      </div>
+
+      <div class="eyebrow">EXISTING VESTRADO ACCOUNT</div>
+      <h1 class="step-title">Connect your existing<br><span class="green">Vestrado account.</span></h1>
+      <p class="step-description account-intro-copy">If your account is already linked to another partner, ask Vestrado whether it can be reassigned to AK Movement.</p>
+
+      <section class="existing-account-card">
+        <h2>Request an IB change</h2>
+        <p>Follow the steps to check your Client ID, partner attribution, and Vestrado’s approval process.</p>
+        <button class="account-change-card" onclick="showGuide(4)">
+          <span class="account-change-icon" aria-hidden="true">✉</span>
+          <span><small>Already have Vestrado?</small><strong>Request an IB change</strong></span>
+          <span class="account-change-arrow" aria-hidden="true">›</span>
+        </button>
+      </section>
+
+      <div class="ib-confirmation">◇ Your existing account must be linked under AK Movement's IB <strong>125579</strong>.</div>
 
       <footer class="footer account-footer">
         <div class="footer-logo">AK</div>
@@ -1548,13 +1608,7 @@
       </div>
 
       <div class="guide-top-actions">
-        <button class="vestrado-open-button guide-open-button" onclick="openVestrado()">Open Vestrado <span aria-hidden="true">↗</span></button>
-        <button class="account-change-card guide-change-card" onclick="showGuide(4)">
-          <span class="account-change-icon" aria-hidden="true">✉</span>
-          <span><small>Already have Vestrado?</small><strong>Request an IB change</strong></span>
-          <span class="account-change-arrow" aria-hidden="true">›</span>
-        </button>
-        <div class="ib-confirmation">◇ Confirm your account is under AK Movement's IB <strong>125579</strong>.</div>
+        <button id="guideOpenAccountButton" class="vestrado-open-button guide-open-button" onclick="openVestrado()">Open Account Vestrado <span class="account-action-mark" aria-hidden="true">◆</span></button>        <div class="ib-confirmation">◇ Confirm your account is under AK Movement's IB <strong>125579</strong>.</div>
       </div>
 
       <section class="guide-panel">
@@ -1749,21 +1803,21 @@
     ========================= */
 
     function newAccount() {
+      accountFlow = "new";
       showGuide(1);
     }
 
 
     function existingAccount() {
-
-      alert(
-        "Existing account setup will be added next."
-      );
-
+      accountFlow = "existing";
+      hideAllScreens();
+      document.getElementById("existingAccountScreen").classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
 
     const guideSteps = [
-      { icon: "↗", visual: "Premium · USD", title: "Check your Vestrado account", description: "Open a Premium account that uses USD. Contact Vestrado support if you need help choosing the correct account type." },
+      { icon: "◇", visual: "Premium · USD", title: "Check your Vestrado account", description: "Open a Premium account that uses USD. Contact Vestrado support if you need help choosing the correct account type." },
       { icon: "⌕", visual: "Client ID", title: "Find your Vestrado Client ID", description: "Locate your Vestrado Client ID. You will use it when you complete your connection checklist here." },
       { icon: "⛓", visual: "Your partner connection", title: "Check your partner attribution", description: "Your account must be attributed to AK Movement's IB 125579 before Trading Journey Circle can be approved." },
       { icon: "◌", visual: "Broker approval required", title: "Ask about changing your IB", description: "If your account is linked elsewhere, ask Vestrado support whether it can be reassigned. Approval depends on Vestrado." },
@@ -1774,6 +1828,7 @@
     ];
 
     let activeGuideStep = 0;
+    let accountFlow = "new";
 
     function renderGuideStep() {
       const item = guideSteps[activeGuideStep];
@@ -1796,6 +1851,7 @@
       activeGuideStep = Math.max(0, Math.min(guideSteps.length - 1, stepNumber - 1));
       hideAllScreens();
       document.getElementById("accountGuideScreen").classList.add("active");
+      document.getElementById("guideOpenAccountButton").hidden = accountFlow === "existing";
       renderGuideStep();
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
