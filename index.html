@@ -870,6 +870,22 @@
       .guide-title { font-size: 19px; }
     }
 
+  
+    /* Member registration and approval access */
+    .registration-nav { display: flex; align-items: center; gap: 18px; margin: 5px 0 30px; }
+    .registration-nav-label { color: var(--gold); font-size: 11px; font-weight: 800; letter-spacing: 2.4px; }
+    .registration-card { padding: 20px; border: 1px solid #4b4634; border-radius: 18px; background: linear-gradient(145deg, #191914, #11110f); }
+    .registration-card label { display: block; margin: 0 0 13px; color: #d8d8d3; font-size: 12px; font-weight: 700; }
+    .registration-card input, .registration-card select { width: 100%; min-height: 47px; margin-top: 7px; padding: 12px 13px; border: 1px solid #3b3b37; border-radius: 11px; background: #101010; color: var(--text); font: inherit; font-size: 14px; outline: none; }
+    .registration-card input:focus, .registration-card select:focus { border-color: var(--gold); }
+    .registration-note { margin: 2px 0 17px; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .form-message, .access-status { min-height: 20px; margin: 12px 0 0; color: var(--gold-bright); font-size: 13px; line-height: 1.4; }
+    .form-message.error { color: #e9a49a; }
+    .access-status { margin: 0 0 16px; color: #c3c8c3; }
+    .member-lock-card .outline-button { margin-top: 3px; }
+    .member-lock-card.access-approved { border-color: rgba(212, 175, 90, 0.7); background: linear-gradient(145deg, #1e1b12, #12110d); }
+    .member-lock-card .outline-button:disabled { opacity: .7; cursor: default; }
+
   </style>
 </head>
 
@@ -1355,18 +1371,13 @@
         Learn the essentials through lessons, quizzes and guided chart practice.
       </p>
 
-      <section class="member-lock-card" aria-label="Member approval required">
+      <section id="learningAccessCard" class="member-lock-card" aria-label="Member approval required">
         <span class="learning-lock" aria-hidden="true"></span>
-
-        <h2>Education Basic Access</h2>
-
-        <p>
-          Your account and at least US$100 in completed deposits must be verified before Education Basic Access opens.
-        </p>
-
-        <p>
-          Once verified, return here to begin your basic lessons.
-        </p>
+        <h2 id="learningAccessTitle">Education Basic Access</h2>
+        <p id="learningAccessCopy">Your account and at least US$100 in completed deposits must be verified before Education Basic Access opens.</p>
+        <p id="learningAccessDetail">Once verified, return here to begin your basic lessons.</p>
+        <div id="learningAccessStatus" class="access-status"></div>
+        <button id="learningAccessButton" class="outline-button" onclick="showRegistration()">Apply for Education Basic Access</button>
       </section>
 
       <footer class="footer learning-footer">
@@ -1505,6 +1516,59 @@
       <button class="guide-finished-link" onclick="showGuide(8)">Finished on Vestrado? Complete my application <span aria-hidden="true">→</span></button>
 
       <footer class="footer account-footer">
+        <div class="footer-logo">AK</div>
+        <div class="footer-name">AK Movement Trading Journey</div>
+        <div class="footer-links"><span>Privacy</span><span>Support</span><span>Owner console</span></div>
+      </footer>
+    </section>
+
+
+    <!-- =====================================
+         EDUCATION REGISTRATION
+    ====================================== -->
+    <section id="registrationScreen" class="screen">
+      <div class="brand-header">
+        <div class="brand-text">
+          <div class="brand-name">AK MOVEMENT</div>
+          <div class="brand-subtitle">TRADING JOURNEY</div>
+        </div>
+        <img src="AKlogo.png" alt="AK Movement" class="brand-logo">
+      </div>
+
+      <div class="registration-nav">
+        <button class="back-button" onclick="showLearningMessage()" aria-label="Back to education access">←</button>
+        <div class="registration-nav-label">EDUCATION REGISTRATION</div>
+      </div>
+
+      <div class="learning-eyebrow">EDUCATION BASIC ACCESS</div>
+      <h1 class="learning-page-title">Start your access request.</h1>
+      <p class="learning-page-intro">Submit your details for manual Vestrado and deposit verification.</p>
+
+      <form id="memberApplicationForm" class="registration-card" onsubmit="submitApplication(event)">
+        <label>Phone number
+          <input id="applicationPhone" type="tel" autocomplete="tel" required placeholder="+60 12 345 6789">
+        </label>
+        <label>Email address
+          <input id="applicationEmail" type="email" autocomplete="email" required placeholder="you@example.com">
+        </label>
+        <label>Vestrado account reference
+          <input id="applicationReference" type="text" required placeholder="Your account reference">
+        </label>
+        <label>Trading experience
+          <select id="applicationExperience" required>
+            <option value="" selected disabled>Select your level</option>
+            <option>Zero Knowledge</option>
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+          </select>
+        </label>
+        <p class="registration-note">We use these details only to verify your Education Basic Access. Never enter your Vestrado password.</p>
+        <button id="applicationSubmitButton" class="primary-button" type="submit">Submit for verification <span class="button-arrow" aria-hidden="true">→</span></button>
+        <p id="applicationMessage" class="form-message" role="status"></p>
+      </form>
+
+      <footer class="footer learning-footer">
         <div class="footer-logo">AK</div>
         <div class="footer-name">AK Movement Trading Journey</div>
         <div class="footer-links"><span>Privacy</span><span>Support</span><span>Owner console</span></div>
@@ -1703,18 +1767,126 @@
     ========================= */
 
     function showLearningMessage() {
-
       hideAllScreens();
+      document.getElementById("learningScreen").classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      refreshMemberAccess();
+    }
 
-      document
-        .getElementById("learningScreen")
-        .classList.add("active");
 
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+    /* =========================
+       MEMBER REGISTRATION
+    ========================= */
+
+    const MEMBER_ACCESS_URL = "https://zwvjdybygajopdkqmzav.supabase.co/functions/v1/member-access";
+
+    async function callMemberAccess(action, values) {
+      const initData = tg?.initData || "";
+      if (!initData) {
+        throw new Error("Please open this Mini App from Telegram to continue.");
+      }
+      const response = await fetch(MEMBER_ACCESS_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.assign({ action: action, initData: initData }, values || {}))
       });
+      const result = await response.json().catch(function() { return {}; });
+      if (!response.ok) throw new Error(result.error || "Something went wrong. Please try again.");
+      return result;
+    }
 
+    function setApplicationMessage(message, isError) {
+      const messageNode = document.getElementById("applicationMessage");
+      if (!messageNode) return;
+      messageNode.textContent = message || "";
+      messageNode.classList.toggle("error", Boolean(isError));
+    }
+
+    function renderMemberAccess(application) {
+      const card = document.getElementById("learningAccessCard");
+      const title = document.getElementById("learningAccessTitle");
+      const copy = document.getElementById("learningAccessCopy");
+      const detail = document.getElementById("learningAccessDetail");
+      const status = document.getElementById("learningAccessStatus");
+      const button = document.getElementById("learningAccessButton");
+      if (!card || !title || !copy || !detail || !status || !button) return;
+
+      card.classList.remove("access-approved");
+      button.disabled = false;
+      button.textContent = "Apply for Education Basic Access";
+
+      if (!tg?.initData) {
+        status.textContent = "Open this Mini App from Telegram to apply or check your access.";
+        return;
+      }
+      if (!application) {
+        status.textContent = "No application has been submitted yet.";
+        return;
+      }
+      if (application.approval_status === "approved" && application.deposit_verified) {
+        card.classList.add("access-approved");
+        title.textContent = "Education Basic Access is unlocked.";
+        copy.textContent = "Your account and eligible deposit have been verified.";
+        detail.textContent = "Your Education Basic Access is active. Lessons will appear here as they are added.";
+        status.textContent = "Approved";
+        button.textContent = "Education Basic Access active";
+        button.disabled = true;
+        return;
+      }
+      if (application.approval_status === "rejected") {
+        status.textContent = "Your application needs an update. Submit your details again or contact AK Movement.";
+        return;
+      }
+      status.textContent = "Your application is pending manual verification.";
+      button.textContent = "Update my application";
+    }
+
+    async function refreshMemberAccess() {
+      const status = document.getElementById("learningAccessStatus");
+      if (!tg?.initData) {
+        renderMemberAccess(null);
+        return;
+      }
+      if (status) status.textContent = "Checking your access…";
+      try {
+        const result = await callMemberAccess("status");
+        renderMemberAccess(result.application);
+      } catch (error) {
+        if (status) status.textContent = error.message || "We could not check your access yet.";
+      }
+    }
+
+    function showRegistration() {
+      if (!tg?.initData) {
+        alert("Please open this Mini App from Telegram to submit your application.");
+        return;
+      }
+      hideAllScreens();
+      document.getElementById("registrationScreen").classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    async function submitApplication(event) {
+      event.preventDefault();
+      const submitButton = document.getElementById("applicationSubmitButton");
+      submitButton.disabled = true;
+      setApplicationMessage("Submitting your application…", false);
+      try {
+        const result = await callMemberAccess("submit", {
+          phone: document.getElementById("applicationPhone").value,
+          email: document.getElementById("applicationEmail").value,
+          vestradoAccountReference: document.getElementById("applicationReference").value,
+          tradingExperience: document.getElementById("applicationExperience").value,
+          requestedAccess: "education_basic"
+        });
+        setApplicationMessage("Submitted. Your application is pending verification.", false);
+        renderMemberAccess(result.application);
+        setTimeout(showLearningMessage, 900);
+      } catch (error) {
+        setApplicationMessage(error.message || "We could not submit your application.", true);
+      } finally {
+        submitButton.disabled = false;
+      }
     }
 
   </script>
