@@ -997,7 +997,7 @@
         </h2>
 
         <p class="card-description">
-          Connect your account and deposit US$300 to unlock Trading Journey Circle.
+          Connect your account and complete an eligible deposit from US$100 to begin your AK access.
         </p>
 
         <button
@@ -1016,7 +1016,7 @@
         <span class="status-check">♢</span>
         <span>Account verified</span>
         <span class="status-plus">+</span>
-        <span>US$300 deposited</span>
+        <span>Eligible deposit</span>
       </div>
 
 
@@ -1652,14 +1652,22 @@
         <img src="AKlogo.png" alt="AK Movement" class="brand-logo">
       </div>
 
-      <div class="registration-nav">
-        <button class="back-button" onclick="showLearningMessage()" aria-label="Back to education access">←</button>
-        <div class="registration-nav-label">EDUCATION REGISTRATION</div>
+      <div class="progress-area">
+        <div class="progress-top">
+          <button class="back-button" onclick="backFromRegistration()" aria-label="Back">←</button>
+          <div class="progress-bars">
+            <div class="progress-bar active"></div>
+            <div class="progress-bar active"></div>
+            <div class="progress-bar active"></div>
+            <div class="progress-bar active"></div>
+          </div>
+          <div class="progress-number">04 / 04</div>
+        </div>
       </div>
 
-      <div class="learning-eyebrow">EDUCATION BASIC ACCESS</div>
-      <h1 class="learning-page-title">Start your access request.</h1>
-      <p class="learning-page-intro">Submit your details for manual Vestrado and deposit verification.</p>
+      <div class="learning-eyebrow">STEP 04 · VERIFICATION</div>
+      <h1 class="learning-page-title">Complete your verification.</h1>
+      <p class="learning-page-intro">Submit your details after creating your Vestrado account and completing your eligible deposit.</p>
 
       <form id="memberApplicationForm" class="registration-card" onsubmit="submitApplication(event)">
         <label>Phone number
@@ -1819,10 +1827,10 @@
     const guideSteps = [
       { icon: "◇", visual: "Premium · USD", title: "Check your Vestrado account", description: "Open a Premium account that uses USD. Contact Vestrado support if you need help choosing the correct account type." },
       { icon: "⌕", visual: "Client ID", title: "Find your Vestrado Client ID", description: "Locate your Vestrado Client ID. You will use it when you complete your connection checklist here." },
-      { icon: "⛓", visual: "Your partner connection", title: "Check your partner attribution", description: "Your account must be attributed to AK Movement's IB 125579 before Trading Journey Circle can be approved." },
+      { icon: "⛓", visual: "Your partner connection", title: "Check your partner attribution", description: "Your account must be attributed to AK Movement's IB 125579 before Education Basic Access can be approved." },
       { icon: "◌", visual: "Broker approval required", title: "Ask about changing your IB", description: "If your account is linked elsewhere, ask Vestrado support whether it can be reassigned. Approval depends on Vestrado." },
       { icon: "◷", visual: "Wait for the broker", title: "Wait for confirmation", description: "Vestrado must confirm any partner change. An instruction or submitted request is not confirmation." },
-      { icon: "▣", visual: "Total deposits: US$300", title: "Check your total deposits", description: "Trading Journey Circle requires US$300 in completed deposits. Trading profit and internal transfers do not count as new deposits." },
+      { icon: "▣", visual: "Total deposits: US$100", title: "Check your total deposits", description: "Education Basic Access requires at least US$100 in completed deposits. Trading profit and internal transfers do not count as new deposits." },
       { icon: "♙", visual: "Ready for verification", title: "Prepare your details", description: "Use the email associated with your Vestrado account and keep your Vestrado Client ID ready." },
       { icon: "✓", visual: "Let's get you connected", title: "Connect your account", description: "Review the account checks, then continue to your setup-ready screen." }
     ];
@@ -1843,7 +1851,7 @@
       }).join("");
       document.getElementById("guidePreviousButton").disabled = activeGuideStep === 0;
       document.getElementById("guideNextButton").innerHTML = activeGuideStep === guideSteps.length - 1
-        ? 'Connect my account <span class="button-arrow" aria-hidden="true">→</span>'
+        ? 'Continue to Step 04 <span class="button-arrow" aria-hidden="true">→</span>'
         : 'Next <span class="button-arrow" aria-hidden="true">→</span>';
     }
 
@@ -1858,9 +1866,7 @@
 
     function nextGuideStep() {
       if (activeGuideStep === guideSteps.length - 1) {
-        hideAllScreens();
-        document.getElementById("accountSuccessScreen").classList.add("active");
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        showRegistration("guide");
         return;
       }
       activeGuideStep += 1;
@@ -1978,14 +1984,25 @@
       }
     }
 
-    function showRegistration() {
+    let registrationReturn = "learning";
+
+    function showRegistration(source) {
       if (!tg?.initData) {
         alert("Please open this Mini App from Telegram to submit your application.");
         return;
       }
+      registrationReturn = source === "guide" ? "guide" : "learning";
       hideAllScreens();
       document.getElementById("registrationScreen").classList.add("active");
       window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function backFromRegistration() {
+      if (registrationReturn === "guide") {
+        showGuide(8);
+        return;
+      }
+      showLearningMessage();
     }
 
     async function submitApplication(event) {
