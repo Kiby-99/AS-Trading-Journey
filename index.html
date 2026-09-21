@@ -625,6 +625,15 @@
       border: 1px solid #3b4b43;
       border-radius: 16px;
       background: linear-gradient(145deg, #151a17, #101311);
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .support-contact-card:visited,
+    .support-contact-card:hover,
+    .support-contact-card:active {
+      color: inherit;
+      text-decoration: none;
     }
 
     .support-contact-icon {
@@ -637,8 +646,9 @@
       border: 1px solid rgba(212, 175, 90, 0.5);
       border-radius: 12px;
       color: var(--gold-bright);
-      font-size: 18px;
     }
+
+    .support-contact-svg { width: 21px; height: 21px; }
 
     .support-contact-copy { flex: 1; min-width: 0; }
     .support-contact-copy strong,
@@ -1507,7 +1517,14 @@
       </section>
 
       <a class="support-contact-card" href="https://wa.me/601133020292?text=Hi%20Admin%20Kila%2C%20help%20me%20to%20register%20please" target="_blank" rel="noopener noreferrer" aria-label="Contact Admin Kila on WhatsApp">
-        <span class="support-contact-icon" aria-hidden="true">◌</span>
+        <span class="support-contact-icon" aria-hidden="true">
+          <svg class="support-contact-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 14v-2a8 8 0 0 1 16 0v2"/>
+            <path d="M4 14a2 2 0 0 0 2 2h1v-5H6a2 2 0 0 0-2 2Z"/>
+            <path d="M20 14a2 2 0 0 1-2 2h-1v-5h1a2 2 0 0 1 2 2Z"/>
+            <path d="M17 17c-1 2-3 3-5 3"/>
+          </svg>
+        </span>
         <span class="support-contact-copy">
           <strong>Need help registering?</strong>
           <span>Contact Admin Kila on WhatsApp</span>
