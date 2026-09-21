@@ -616,6 +616,52 @@
 
     .member-lock-card p:last-child { margin-bottom: 0; }
 
+    .support-contact-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 14px;
+      padding: 15px 16px;
+      border: 1px solid #3b4b43;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #151a17, #101311);
+    }
+
+    .support-contact-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      flex: 0 0 auto;
+      border: 1px solid rgba(212, 175, 90, 0.5);
+      border-radius: 12px;
+      color: var(--gold-bright);
+      font-size: 18px;
+    }
+
+    .support-contact-copy { flex: 1; min-width: 0; }
+    .support-contact-copy strong,
+    .support-contact-copy span { display: block; }
+
+    .support-contact-copy strong {
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.25;
+    }
+
+    .support-contact-copy span {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .support-contact-mark {
+      color: var(--gold-bright);
+      font-size: 15px;
+    }
+
     .learning-footer { margin-top: 52px; }
 
     @media (max-width: 390px) {
@@ -1459,6 +1505,15 @@
           </a>
         </div>
       </section>
+
+      <a class="support-contact-card" href="https://wa.me/601133020292?text=Hi%20Admin%20Kila%2C%20help%20me%20to%20register%20please" target="_blank" rel="noopener noreferrer" aria-label="Contact Admin Kila on WhatsApp">
+        <span class="support-contact-icon" aria-hidden="true">◌</span>
+        <span class="support-contact-copy">
+          <strong>Need help registering?</strong>
+          <span>Contact Admin Kila on WhatsApp</span>
+        </span>
+        <span class="support-contact-mark" aria-hidden="true">◆</span>
+      </a>
 
       <footer class="footer learning-footer">
         <div class="footer-logo">AK</div>
