@@ -886,6 +886,52 @@
     .member-lock-card.access-approved { border-color: rgba(212, 175, 90, 0.7); background: linear-gradient(145deg, #1e1b12, #12110d); }
     .member-lock-card .outline-button:disabled { opacity: .7; cursor: default; }
 
+  
+    /* Approved member resources */
+    .approved-resources {
+      margin-top: 14px;
+      padding: 20px;
+      border: 1px solid rgba(212, 175, 90, 0.58);
+      border-radius: 18px;
+      background: linear-gradient(145deg, #1b1810, #11100d);
+    }
+    .approved-resources-label {
+      margin-bottom: 9px;
+      color: var(--gold);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+    .approved-resources h2 {
+      margin: 0 0 8px;
+      color: #fff;
+      font-size: 19px;
+      line-height: 1.2;
+    }
+    .approved-resources p {
+      margin: 0 0 15px;
+      color: #c3c8c3;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .resource-links { display: grid; gap: 9px; }
+    .resource-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 48px;
+      padding: 12px 14px;
+      border: 1px solid #3d3a2e;
+      border-radius: 12px;
+      background: #151513;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .resource-link span:last-child { color: var(--gold-bright); font-size: 19px; font-weight: 400; }
+    .resource-link:active { background: #211f17; transform: scale(.99); }
+
   </style>
 </head>
 
@@ -1380,6 +1426,23 @@
         <button id="learningAccessButton" class="outline-button" onclick="showRegistration()">Apply for Education Basic Access</button>
       </section>
 
+      <section id="approvedResources" class="approved-resources" hidden aria-label="Approved member resources">
+        <div class="approved-resources-label">APPROVED MEMBER RESOURCES</div>
+        <h2>Education Basic Access</h2>
+        <p>Your member resources are ready. Choose where you would like to continue.</p>
+        <div class="resource-links">
+          <a class="resource-link" href="https://kiby-99.github.io/MillionKids-E-Book/" target="_blank" rel="noopener noreferrer">
+            <span>Open E-Book Basic</span><span aria-hidden="true">↗</span>
+          </a>
+          <a class="resource-link" href="https://chat.whatsapp.com/CtFke6QLrfrDYqv2rMU2wv" target="_blank" rel="noopener noreferrer">
+            <span>Join WhatsApp Support</span><span aria-hidden="true">↗</span>
+          </a>
+          <a class="resource-link" href="https://t.me/PNTHERFX" target="_blank" rel="noopener noreferrer">
+            <span>Open Telegram Signals</span><span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </section>
+
       <footer class="footer learning-footer">
         <div class="footer-logo">AK</div>
 
@@ -1809,9 +1872,11 @@
       const detail = document.getElementById("learningAccessDetail");
       const status = document.getElementById("learningAccessStatus");
       const button = document.getElementById("learningAccessButton");
+      const resources = document.getElementById("approvedResources");
       if (!card || !title || !copy || !detail || !status || !button) return;
 
       card.classList.remove("access-approved");
+      if (resources) resources.hidden = true;
       button.disabled = false;
       button.textContent = "Apply for Education Basic Access";
 
@@ -1825,6 +1890,7 @@
       }
       if (application.approval_status === "approved" && application.deposit_verified) {
         card.classList.add("access-approved");
+        if (resources) resources.hidden = false;
         title.textContent = "Education Basic Access is unlocked.";
         copy.textContent = "Your account and eligible deposit have been verified.";
         detail.textContent = "Your Education Basic Access is active. Lessons will appear here as they are added.";
