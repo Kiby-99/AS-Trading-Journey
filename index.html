@@ -1051,6 +1051,8 @@
       line-height: 1.45;
     }
 
+    .closed-access-panel .outline-button { margin-top: 10px; }
+
     /* Premium launch state while the enrolment mode is checked. */
     body.app-loading .app { visibility: hidden; }
 
@@ -1220,7 +1222,7 @@
 
         <button
           class="gold-button"
-          onclick="goToStep(1)"
+          onclick="showCircleAccess()"
         >
           Unlock Journey access <span class="button-lock" aria-hidden="true"></span>
         </button>
@@ -1336,7 +1338,8 @@
         <h1>Registration is currently closed.</h1>
         <p>AK Movement is currently welcoming verified Education Basic Access members.</p>
         <div class="closed-access-note">Already approved after your eligible US$100 deposit? Check your access below.</div>
-        <button class="primary-button" onclick="showLearningMessage()">Check my access <span class="button-arrow" aria-hidden="true">→</span></button>
+        <button class="primary-button" onclick="showLearningMessage()">Check Education Basic Access <span class="button-arrow" aria-hidden="true">→</span></button>
+        <button class="outline-button" onclick="showCircleAccess()">Check AK Journey Circle Access</button>
       </section>
 
       <a class="support-contact-card" href="https://wa.me/601133020292?text=Hi%20Admin%20Kila%2C%20help%20me%20to%20register%20please" target="_blank" rel="noopener noreferrer" aria-label="Contact Admin Kila on WhatsApp">
@@ -1743,6 +1746,78 @@
         </div>
       </footer>
 
+    </section>
+
+
+    <!-- =====================================
+         AK JOURNEY CIRCLE ACCESS
+    ====================================== -->
+
+    <section id="circleAccessScreen" class="screen">
+      <div class="brand-header">
+        <div class="brand-text">
+          <div class="brand-name">AK MOVEMENT</div>
+          <div class="brand-subtitle">TRADING JOURNEY</div>
+        </div>
+        <img src="AKlogo.png" alt="AK Movement" class="brand-logo">
+      </div>
+
+      <div class="learning-nav">
+        <button class="back-button" onclick="goHome()" aria-label="Back to home">←</button>
+        <div class="learning-nav-label">JOURNEY CIRCLE</div>
+      </div>
+
+      <div class="learning-eyebrow">AK JOURNEY CIRCLE ACCESS</div>
+      <h1 class="learning-page-title">Step into the Circle.</h1>
+      <p class="learning-page-intro">Journey Circle members receive Masterclass learning, the private Circle group, signal access and member support.</p>
+
+      <section id="circleAccessCard" class="member-lock-card" aria-label="Journey Circle approval required">
+        <span class="learning-lock" aria-hidden="true"></span>
+        <h2 id="circleAccessTitle">AK Journey Circle</h2>
+        <p id="circleAccessCopy">Your Vestrado account and at least US$300 in eligible completed deposits must be verified before Journey Circle opens.</p>
+        <p id="circleAccessDetail">Once verified, return here to unlock your Circle resources.</p>
+        <div id="circleAccessStatus" class="access-status"></div>
+        <button id="circleAccessButton" class="outline-button" onclick="goToStep(1)">Begin account setup</button>
+      </section>
+
+      <section id="circleResources" class="approved-resources" hidden aria-label="Journey Circle member resources">
+        <div class="approved-resources-label">JOURNEY CIRCLE RESOURCES</div>
+        <h2>AK Journey Circle</h2>
+        <p>Your Circle benefits are active. Education Basic Access remains available too.</p>
+        <div class="resource-links">
+          <a class="resource-link" href="https://kiby-99.github.io/LegacyPantherEBook/" target="_blank" rel="noopener noreferrer">
+            <span>Access Masterclass E-Book</span><span class="resource-diamond" aria-hidden="true">◆</span>
+          </a>
+          <a class="resource-link" href="https://chat.whatsapp.com/FpZ5bcKpG3SFJOpucKRH7A" target="_blank" rel="noopener noreferrer">
+            <span>Access Trading Circle Journey</span><span class="resource-diamond" aria-hidden="true">◆</span>
+          </a>
+          <a class="resource-link" href="https://t.me/PNTHERFX" target="_blank" rel="noopener noreferrer">
+            <span>Access Telegram Signal</span><span class="resource-diamond" aria-hidden="true">◆</span>
+          </a>
+          <a class="resource-link" href="https://chat.whatsapp.com/CtFke6QLrfrDYqv2rMU2wv" target="_blank" rel="noopener noreferrer">
+            <span>Access Group Support</span><span class="resource-diamond" aria-hidden="true">◆</span>
+          </a>
+        </div>
+      </section>
+
+      <a class="support-contact-card" href="https://wa.me/601133020292?text=Hi%20Admin%20Kila%2C%20help%20me%20to%20register%20please" target="_blank" rel="noopener noreferrer" aria-label="Contact Admin Kila on WhatsApp">
+        <span class="support-contact-icon" aria-hidden="true">
+          <svg class="support-contact-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 14v-2a8 8 0 0 1 16 0v2"/>
+            <path d="M4 14a2 2 0 0 0 2 2h1v-5H6a2 2 0 0 0-2 2Z"/>
+            <path d="M20 14a2 2 0 0 1-2 2h-1v-5h1a2 2 0 0 1 2 2Z"/>
+            <path d="M17 17c-1 2-3 3-5 3"/>
+          </svg>
+        </span>
+        <span class="support-contact-copy"><strong>Need help?</strong><span>Contact Admin Kila on WhatsApp</span></span>
+        <span class="support-contact-mark" aria-hidden="true">◆</span>
+      </a>
+
+      <footer class="footer learning-footer">
+        <div class="footer-logo">AK</div>
+        <div class="footer-name">AK Movement Trading Journey</div>
+        <div class="footer-links"><span>Privacy</span><span>Support</span><span>Owner console</span></div>
+      </footer>
     </section>
 
 
@@ -2183,6 +2258,13 @@
       refreshMemberAccess();
     }
 
+    function showCircleAccess() {
+      hideAllScreens();
+      document.getElementById("circleAccessScreen").classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      refreshCircleAccess();
+    }
+
 
     /* =========================
        MEMBER REGISTRATION
@@ -2273,7 +2355,8 @@
         status.textContent = "No application has been submitted yet.";
         return;
       }
-      if (application.approval_status === "approved" && application.deposit_verified) {
+      if (application.approval_status === "approved" && application.deposit_verified &&
+          (application.access_tier === "education_basic" || application.access_tier === "journey_circle")) {
         card.classList.add("access-approved");
         if (resources) resources.hidden = false;
         title.textContent = "Education Basic Access is unlocked.";
@@ -2312,6 +2395,69 @@
         renderMemberAccess(result.application);
       } catch (error) {
         if (status) status.textContent = error.message || "We could not check your access yet.";
+      }
+    }
+
+    function renderCircleAccess(application) {
+      const card = document.getElementById("circleAccessCard");
+      const title = document.getElementById("circleAccessTitle");
+      const copy = document.getElementById("circleAccessCopy");
+      const detail = document.getElementById("circleAccessDetail");
+      const status = document.getElementById("circleAccessStatus");
+      const button = document.getElementById("circleAccessButton");
+      const resources = document.getElementById("circleResources");
+      if (!card || !title || !copy || !detail || !status || !button) return;
+
+      card.classList.remove("access-approved");
+      if (resources) resources.hidden = true;
+      button.disabled = false;
+      button.textContent = registrationOpen ? "Begin account setup" : "Contact Admin Kila";
+      button.onclick = registrationOpen ? function() { goToStep(1); } : openSupportChat;
+
+      if (!tg?.initData) {
+        status.textContent = "Open this Mini App from Telegram to check your Journey Circle access.";
+        return;
+      }
+      if (application?.access_tier === "journey_circle") {
+        card.classList.add("access-approved");
+        if (resources) resources.hidden = false;
+        title.textContent = "AK Journey Circle is unlocked.";
+        copy.textContent = "Your Vestrado account and US$300 eligible completed deposit have been verified.";
+        detail.textContent = "Your Circle resources are active, including Masterclass learning and private member access.";
+        status.textContent = "Journey Circle active";
+        button.textContent = "AK Journey Circle active";
+        button.disabled = true;
+        return;
+      }
+      if (application?.access_tier === "education_basic") {
+        title.textContent = "Education Basic Access is active.";
+        copy.textContent = "Your current verified level is Education Basic Access.";
+        detail.textContent = "AK Journey Circle opens once a total eligible US$300 deposit is verified by AK Movement.";
+        status.textContent = "Journey Circle is not active yet.";
+        button.textContent = "Contact Admin Kila";
+        button.onclick = openSupportChat;
+        return;
+      }
+      title.textContent = "AK Journey Circle is not available yet.";
+      copy.textContent = "Journey Circle opens after AK Movement verifies your Vestrado account and a minimum US$300 eligible completed deposit.";
+      detail.textContent = "Once approved, return here and use Check AK Journey Circle Access.";
+      status.textContent = "We could not find approved Journey Circle access for this account yet.";
+      button.textContent = "Contact Admin Kila";
+      button.onclick = openSupportChat;
+    }
+
+    async function refreshCircleAccess() {
+      const status = document.getElementById("circleAccessStatus");
+      if (!tg?.initData) {
+        renderCircleAccess(null);
+        return;
+      }
+      if (status) status.textContent = "Checking your Journey Circle access…";
+      try {
+        const result = await callMemberAccess("status");
+        renderCircleAccess(result.application);
+      } catch (error) {
+        if (status) status.textContent = error.message || "We could not check your Journey Circle access yet.";
       }
     }
 
