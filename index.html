@@ -1051,10 +1051,12 @@
       line-height: 1.45;
     }
 
+    /* Keep the first screen hidden until the enrolment mode is known. */
+    body.app-loading .app { visibility: hidden; }
   </style>
 </head>
 
-<body>
+<body class="app-loading">
 
   <div class="app">
 
@@ -2121,6 +2123,8 @@
         if (!registrationOpen) showClosedAccess();
       } catch (error) {
         registrationOpen = true;
+      } finally {
+        document.body.classList.remove("app-loading");
       }
     }
 
@@ -2252,6 +2256,9 @@
     }
 
     loadRegistrationMode();
+    setTimeout(function() {
+      document.body.classList.remove("app-loading");
+    }, 2500);
   </script>
 
 </body>
