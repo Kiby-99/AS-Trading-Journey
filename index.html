@@ -988,6 +988,54 @@
     .resource-link .resource-diamond { color: var(--gold-bright); font-size: 12px; }
     .resource-link:active { background: #211f17; transform: scale(.99); }
 
+    .indicator-request {
+      margin-top: 15px;
+      padding-top: 16px;
+      border-top: 1px solid #3d3a2e;
+    }
+
+    .indicator-request h3 {
+      margin: 0 0 6px;
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    .indicator-request p {
+      margin-bottom: 13px;
+      font-size: 12px;
+    }
+
+    .indicator-fields { display: grid; gap: 9px; }
+
+    .indicator-fields input {
+      width: 100%;
+      min-height: 43px;
+      padding: 10px 12px;
+      border: 1px solid #454239;
+      border-radius: 11px;
+      outline: none;
+      background: #11110f;
+      color: var(--text);
+      font: inherit;
+      font-size: 13px;
+    }
+
+    .indicator-fields input:focus { border-color: var(--gold); }
+
+    .indicator-request .primary-button {
+      min-height: 44px;
+      margin-top: 11px;
+      font-size: 13px;
+    }
+
+    .indicator-message {
+      min-height: 0;
+      margin: 9px 0 0 !important;
+      color: var(--gold-bright) !important;
+      font-size: 12px !important;
+    }
+
   
     .account-action-mark {
       color: #17130b;
@@ -1716,6 +1764,17 @@
             <span>Access Telegram Signal</span><span class="resource-diamond" aria-hidden="true">◆</span>
           </a>
         </div>
+        <section class="indicator-request" aria-label="Education Basic Access indicator request">
+          <div class="approved-resources-label">ACCESS INDICATOR</div>
+          <h3>Request Indicator</h3>
+          <p>Enter your Client ID and TradingView username. Your request will open in WhatsApp ready to send.</p>
+          <div class="indicator-fields">
+            <input id="basicIndicatorClientId" type="text" autocomplete="off" placeholder="Client ID">
+            <input id="basicIndicatorTradingView" type="text" autocapitalize="none" autocomplete="username" placeholder="TradingView Username">
+          </div>
+          <button type="button" class="primary-button" onclick="requestIndicatorAccess('basic')">Request Indicator on WhatsApp <span class="button-arrow" aria-hidden="true">→</span></button>
+          <p id="basicIndicatorMessage" class="indicator-message" role="status"></p>
+        </section>
       </section>
 
       <a class="support-contact-card" href="https://wa.me/601133020292?text=Hi%20Admin%20Kila%2C%20help%20me%20to%20register%20please" target="_blank" rel="noopener noreferrer" aria-label="Contact Admin Kila on WhatsApp">
@@ -1801,6 +1860,17 @@
             <span>Access Group Support</span><span class="resource-diamond" aria-hidden="true">◆</span>
           </a>
         </div>
+        <section class="indicator-request" aria-label="AK Journey Circle indicator request">
+          <div class="approved-resources-label">ACCESS INDICATOR</div>
+          <h3>Request Indicator</h3>
+          <p>Enter your Client ID and TradingView username. Your request will open in WhatsApp ready to send.</p>
+          <div class="indicator-fields">
+            <input id="circleIndicatorClientId" type="text" autocomplete="off" placeholder="Client ID">
+            <input id="circleIndicatorTradingView" type="text" autocapitalize="none" autocomplete="username" placeholder="TradingView Username">
+          </div>
+          <button type="button" class="primary-button" onclick="requestIndicatorAccess('circle')">Request Indicator on WhatsApp <span class="button-arrow" aria-hidden="true">→</span></button>
+          <p id="circleIndicatorMessage" class="indicator-message" role="status"></p>
+        </section>
       </section>
 
       <a class="support-contact-card" href="https://wa.me/601133020292?text=Hi%20Admin%20Kila%2C%20help%20me%20to%20register%20please" target="_blank" rel="noopener noreferrer" aria-label="Contact Admin Kila on WhatsApp">
@@ -2318,6 +2388,22 @@
 
     function openSupportChat() {
       window.open("https://wa.me/601133020292?text=Hi%20Admin%20Kila%2C%20help%20me%20to%20register%20please", "_blank", "noopener");
+    }
+
+    function requestIndicatorAccess(level) {
+      const isCircle = level === "circle";
+      const clientId = document.getElementById(level + "IndicatorClientId")?.value.trim();
+      const tradingView = document.getElementById(level + "IndicatorTradingView")?.value.trim();
+      const messageNode = document.getElementById(level + "IndicatorMessage");
+      if (!clientId || !tradingView) {
+        if (messageNode) messageNode.textContent = "Please enter both your Client ID and TradingView username.";
+        return;
+      }
+      if (messageNode) messageNode.textContent = "";
+      const accessName = isCircle ? "AK Journey Circle" : "Education Basic Access";
+      const message = "Hi Admin Kila, I would like to request Indicator access.\\n\\nAccess level: " +
+        accessName + "\\nClient ID: " + clientId + "\\nTradingView Username: " + tradingView;
+      window.open("https://wa.me/601133020292?text=" + encodeURIComponent(message), "_blank", "noopener");
     }
 
     function showClosedAccessMessage(title, copy, detail, statusNode, message, button) {
