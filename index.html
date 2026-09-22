@@ -1051,12 +1051,93 @@
       line-height: 1.45;
     }
 
-    /* Keep the first screen hidden until the enrolment mode is known. */
+    /* Premium launch state while the enrolment mode is checked. */
     body.app-loading .app { visibility: hidden; }
+
+    .launch-loader {
+      position: fixed;
+      z-index: 20;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      background: var(--bg);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    body.app-loading .launch-loader {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .launch-loader-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 260px;
+      text-align: center;
+    }
+
+    .launch-logo {
+      width: 74px;
+      height: 74px;
+      margin-bottom: 19px;
+      border-radius: 50%;
+      object-fit: contain;
+    }
+
+    .launch-name {
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 750;
+      letter-spacing: 2px;
+    }
+
+    .launch-subtitle {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
+
+    .launch-ring {
+      width: 25px;
+      height: 25px;
+      margin: 42px 0 14px;
+      border: 2px solid rgba(212, 175, 90, 0.2);
+      border-top-color: var(--gold-bright);
+      border-radius: 50%;
+      animation: launch-spin 0.85s linear infinite;
+    }
+
+    .launch-copy {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    @keyframes launch-spin {
+      to { transform: rotate(360deg); }
+    }
   </style>
 </head>
 
 <body class="app-loading">
+
+  <div class="launch-loader" aria-live="polite" aria-label="Checking your access">
+    <div class="launch-loader-content">
+      <img src="AKlogo.png" alt="AK Movement" class="launch-logo">
+      <div class="launch-name">AK MOVEMENT</div>
+      <div class="launch-subtitle">TRADING JOURNEY</div>
+      <div class="launch-ring" aria-hidden="true"></div>
+      <div class="launch-copy">Checking your access…</div>
+    </div>
+  </div>
 
   <div class="app">
 
