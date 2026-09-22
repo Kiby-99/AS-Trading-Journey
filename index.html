@@ -2150,6 +2150,19 @@
       messageNode.classList.toggle("error", Boolean(isError));
     }
 
+    function openSupportChat() {
+      window.open("https://wa.me/601133020292?text=Hi%20Admin%20Kila%2C%20help%20me%20to%20register%20please", "_blank", "noopener");
+    }
+
+    function showClosedAccessMessage(title, copy, detail, status, button) {
+      title.textContent = "Education Basic Access is not available yet.";
+      copy.textContent = "Education Basic Access opens after AK Movement verifies your Vestrado account and a minimum US$100 eligible completed deposit.";
+      detail.textContent = "Once approved, return here and use Check my access to unlock your member resources.";
+      status.textContent = status;
+      button.textContent = "Contact Admin Kila";
+      button.onclick = openSupportChat;
+    }
+
     function renderMemberAccess(application) {
       const card = document.getElementById("learningAccessCard");
       const title = document.getElementById("learningAccessTitle");
@@ -2164,6 +2177,12 @@
       if (resources) resources.hidden = true;
       button.disabled = false;
       button.textContent = "Apply for Education Basic Access";
+      button.onclick = function() { showRegistration(); };
+
+      if (!registrationOpen && !application) {
+        showClosedAccessMessage(title, copy, detail, "We could not find approved Education Basic Access for this account yet.", button);
+        return;
+      }
 
       if (!tg?.initData) {
         status.textContent = "Open this Mini App from Telegram to apply or check your access.";
@@ -2185,7 +2204,15 @@
         return;
       }
       if (application.approval_status === "rejected") {
+        if (!registrationOpen) {
+          showClosedAccessMessage(title, copy, detail, "Your application needs help before it can be approved.", button);
+          return;
+        }
         status.textContent = "Your application needs an update. Submit your details again or contact AK Movement.";
+        return;
+      }
+      if (!registrationOpen) {
+        showClosedAccessMessage(title, copy, detail, "Your application is still awaiting AK Movement's manual verification.", button);
         return;
       }
       status.textContent = "Your application is pending manual verification.";
