@@ -1983,12 +1983,19 @@
 
       <section class="existing-account-card">
         <h2>Request an IB change</h2>
-        <p>Follow the steps to check your Client ID, partner attribution, and Vestrado’s approval process.</p>
-        <button class="account-change-card" onclick="showGuide(4)">
-          <span class="account-change-icon" aria-hidden="true">✉</span>
-          <span><small>Already have Vestrado?</small><strong>Request an IB change</strong></span>
-          <span class="account-change-arrow" aria-hidden="true">›</span>
-        </button>
+        <p>Follow these steps, then submit your request directly to Vestrado.</p>
+        <ol style="margin:0 0 16px;padding-left:20px;color:#c3c8c3;font-size:14px;line-height:1.6">
+          <li>Open a new support ticket.</li>
+          <li>Select <strong>Partners</strong> as the category.</li>
+          <li>Use <strong>Change IB Request</strong> as the title.</li>
+          <li>Copy and paste the message below.</li>
+        </ol>
+        <textarea readonly aria-label="IB change request message" style="width:100%;min-height:155px;margin:0 0 11px;padding:13px;border:1px solid #3d3a2e;border-radius:12px;background:#11110f;color:#d7d7d4;font:13px/1.5 Arial,Helvetica,sans-serif;resize:none">Dear VTR,
+Kindly reassign my wallet to be under IB 125579.
+Referral link: https://my.vestrado.asia/links/go/2687
+Reason I want to join his team.
+Thank you.</textarea>
+        <button class="primary-button" type="button" onclick="window.open('https://my.vestrado.com/help-desk/new/','_blank','noopener')">Open Vestrado ticket <span class="button-arrow" aria-hidden="true">→</span></button>
       </section>
 
       <div class="ib-confirmation">◇ Your existing account must be linked under SYAF Movement's IB <strong>125579</strong>.</div>
