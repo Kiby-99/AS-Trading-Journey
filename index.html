@@ -1115,7 +1115,7 @@
       background: var(--bg);
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.2s ease;
+      transition: opacity 0.65s ease;
     }
 
     body.app-loading .launch-loader {
@@ -1166,7 +1166,7 @@
     }
 
     .launch-loader-content {
-      animation: launch-reveal 0.55s ease-out both;
+      animation: launch-reveal 0.9s ease-out both;
     }
 
     .launch-copy {
@@ -2631,7 +2631,7 @@ Thank you.</textarea>
     loadRegistrationMode();
     setTimeout(function() {
       document.body.classList.remove("app-loading");
-    }, 3400);
+    }, 5000);
   </script>
 
 </body>
