@@ -1165,6 +1165,10 @@
       animation: launch-spin 0.85s linear infinite;
     }
 
+    .launch-loader-content {
+      animation: launch-reveal 0.55s ease-out both;
+    }
+
     .launch-copy {
       color: var(--muted);
       font-size: 14px;
@@ -1173,6 +1177,11 @@
 
     @keyframes launch-spin {
       to { transform: rotate(360deg); }
+    }
+
+    @keyframes launch-reveal {
+      from { opacity: 0; transform: translateY(10px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
   </style>
 </head>
@@ -2622,7 +2631,7 @@ Thank you.</textarea>
     loadRegistrationMode();
     setTimeout(function() {
       document.body.classList.remove("app-loading");
-    }, 2500);
+    }, 3400);
   </script>
 
 </body>
