@@ -943,6 +943,42 @@
     .member-lock-card .outline-button:disabled { opacity: .7; cursor: default; }
 
   
+
+    /* Personal coaching */
+    .coaching-card {
+      position: relative;
+      overflow: hidden;
+      margin-top: 14px;
+      padding: 22px 20px 20px;
+      border: 1px solid rgba(224, 185, 91, 0.72);
+      border-radius: 20px;
+      background: radial-gradient(circle at 92% 0%, rgba(213, 170, 69, .17), transparent 36%), linear-gradient(145deg, #1e1b12, #0f0f0e 72%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 12px 32px rgba(0,0,0,.24);
+    }
+    .coaching-card::before {
+      content: "PERSONAL COACHING";
+      display: block;
+      margin-bottom: 11px;
+      color: #e2bc64;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .2em;
+    }
+    .coaching-card .icon-box { margin-bottom: 13px; }
+    .coaching-card h2 { margin: 0 0 8px; color: #fff; font-size: 20px; line-height: 1.2; }
+    .coaching-card p { margin: 0 0 16px; color: #c3c8c3; font-size: 13px; line-height: 1.45; }
+    .coaching-package-list { display: grid; gap: 9px; margin: 14px 0 18px; }
+    .coaching-package-item { padding: 13px; border: 1px solid rgba(212, 175, 90, .32); border-radius: 13px; background: linear-gradient(135deg, rgba(255,255,255,.035), rgba(212,175,90,.06)); color: var(--text); font-size: 13px; font-weight: 750; }
+    .coaching-package-item span { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; font-weight: 400; }
+    .coaching-form textarea { width: 100%; min-height: 100px; margin-top: 7px; padding: 12px 13px; border: 1px solid #3b3b37; border-radius: 11px; background: #101010; color: var(--text); font: inherit; font-size: 14px; outline: none; resize: vertical; }
+    .coaching-form textarea:focus { border-color: var(--gold); }
+
+    .coaching-benefit-panel { margin: 18px 0; padding: 16px; border: 1px solid #3d3a2e; border-radius: 15px; background: #151513; }
+    .coaching-benefit-panel h2 { margin: 0 0 6px; color: var(--gold); font-size: 15px; letter-spacing: .04em; text-transform: uppercase; }
+    .coaching-benefit-panel h3 { margin: 15px 0 6px; color: #fff; font-size: 16px; }
+    .coaching-benefit-panel h3:first-of-type { margin-top: 0; }
+    .coaching-benefit-panel p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
+
     /* Approved member resources */
     .approved-resources {
       margin-top: 14px;
@@ -1312,6 +1348,18 @@
 
       </div>
 
+
+      <!-- PERSONAL COACHING -->
+      <div class="card coaching-card">
+        <div class="icon-box icon-gold" aria-hidden="true">◇</div>
+        <h2>Personal Coaching</h2>
+        <p>Choose a private coaching path designed around your current experience and trading goals.</p>
+        <div class="coaching-package-list">
+          <div class="coaching-package-item">Basic Package — RM 2,000<span>2 coaching sessions · E-Book Basic · Indicator · VIP group</span></div>
+          <div class="coaching-package-item">Basic to Advanced Package — RM 3,500<span>3 coaching sessions · E-Book Basic to Advanced + Masterclass · Indicator · VIP group</span></div>
+        </div>
+        <button class="outline-button" onclick="showCoaching()">Explore Personal Coaching&nbsp; ◆</button>
+      </div>
 
       <!-- MAIN PAGE SUPPORT -->
 
@@ -2090,6 +2138,68 @@ Thank you.</textarea>
 
 
     <!-- =====================================
+         PERSONAL COACHING
+    ====================================== -->
+    <section id="coachingScreen" class="screen">
+      <div class="brand-header">
+        <div class="brand-text">
+          <div class="brand-name">SYAF MOVEMENT</div>
+          <div class="brand-subtitle">TRADING JOURNEY</div>
+        </div>
+        <img src="SYAFlogo.png" alt="SYAF Movement" class="brand-logo">
+      </div>
+      <div class="learning-nav">
+        <button class="back-button" onclick="goHome()" aria-label="Back to home">←</button>
+        <div class="learning-nav-label">PERSONAL COACHING</div>
+      </div>
+      <div class="learning-eyebrow">PRIVATE GUIDANCE</div>
+      <h1 class="learning-page-title">Build your own trading path.</h1>
+      <p class="learning-page-intro">Tell us where you are now and choose the coaching package that suits your journey.</p>
+      <div class="coaching-benefit-panel">
+        <h2>Coaching Packages</h2>
+        <h3>Basic Package — RM 2,000</h3>
+        <p>2 personal coaching sessions (F2F or online), E-Book Basic, indicator, merchandise, VIP &amp; Personal Coaching Group access, and progression monitoring.</p>
+        <h3>Basic to Advanced Package — RM 3,500</h3>
+        <p>3 personal coaching sessions (F2F or online), E-Book Basic to Advanced and E-Book Masterclass, indicator, merchandise, VIP &amp; Personal Coaching Group access, and progression monitoring.</p>
+      </div>
+      <form id="coachingRequestForm" class="registration-card coaching-form" onsubmit="submitCoachingRequest(event)">
+        <label>Choose your package
+          <select id="coachingPackage" required>
+            <option value="" selected disabled>Select a package</option>
+            <option>Basic Package</option>
+            <option>Basic to Advanced Package</option>
+          </select>
+        </label>
+        <label>Your name
+          <input id="coachingName" type="text" autocomplete="name" required placeholder="Your full name">
+        </label>
+        <label>WhatsApp number
+          <input id="coachingPhone" type="tel" autocomplete="tel" required placeholder="+60 12 345 6789">
+        </label>
+        <label>Trading experience
+          <select id="coachingExperience" required>
+            <option value="" selected disabled>Select your level</option>
+            <option>Zero Knowledge</option>
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+          </select>
+        </label>
+        <label>Your coaching goal
+          <textarea id="coachingGoal" required placeholder="What would you like help with?"></textarea>
+        </label>
+        <p class="registration-note">When you tap the button, your request opens in WhatsApp for you to review and send to Admin Kila.</p>
+        <button class="primary-button" type="submit">Send coaching request <span class="button-arrow" aria-hidden="true">→</span></button>
+        <p id="coachingMessage" class="form-message" role="status"></p>
+      </form>
+      <footer class="footer learning-footer">
+        <div class="footer-logo">SM</div>
+        <div class="footer-name">SYAF Movement Trading Journey</div>
+        <div class="footer-links"><span>Privacy</span><span>Support</span><span>Owner console</span></div>
+      </footer>
+    </section>
+
+    <!-- =====================================
          EDUCATION REGISTRATION
     ====================================== -->
     <section id="registrationScreen" class="screen">
@@ -2368,6 +2478,28 @@ Thank you.</textarea>
       refreshCircleAccess();
     }
 
+
+    function showCoaching() {
+      hideAllScreens();
+      document.getElementById("coachingScreen").classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function submitCoachingRequest(event) {
+      event.preventDefault();
+      const packageName = document.getElementById("coachingPackage").value;
+      const name = document.getElementById("coachingName").value.trim();
+      const phone = document.getElementById("coachingPhone").value.trim();
+      const experience = document.getElementById("coachingExperience").value;
+      const goal = document.getElementById("coachingGoal").value.trim();
+      const message = "Hi Admin Kila, I would like to request Personal Coaching.\n\n" +
+        "Package: " + packageName + "\n" +
+        "Name: " + name + "\n" +
+        "WhatsApp: " + phone + "\n" +
+        "Trading experience: " + experience + "\n" +
+        "Coaching goal: " + goal;
+      window.open("https://wa.me/601133020292?text=" + encodeURIComponent(message), "_blank", "noopener");
+    }
 
     /* =========================
        MEMBER REGISTRATION
