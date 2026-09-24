@@ -1234,6 +1234,22 @@
       from { opacity: 0; transform: translateY(10px) scale(0.98); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
+  
+    /* Unified micro-icons */
+    .button-arrow, .resource-diamond, .support-contact-mark, .account-action-mark, .status-check, .security-icon, .ib-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      vertical-align: middle;
+    }
+    .button-arrow svg, .resource-diamond svg, .support-contact-mark svg, .account-action-mark svg, .status-check svg, .security-icon svg, .ib-icon svg {
+      width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .button-arrow { width: 18px; height: 18px; }
+    .resource-diamond, .support-contact-mark { width: 17px; height: 17px; }
+    .account-action-mark { width: 15px; height: 15px; }
+    .status-check, .security-icon, .ib-icon { width: 17px; height: 17px; }
+
   </style>
 </head>
 
@@ -1299,7 +1315,7 @@
           class="primary-button"
           onclick="goToStep(1)"
         >
-          Connect my account <span class="button-arrow" aria-hidden="true">→</span>
+          Connect my account <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span>
         </button>
 
       </div>
@@ -1308,7 +1324,7 @@
       <!-- STATUS -->
 
       <div class="status-line journey-status">
-        <span class="status-check">♢</span>
+        <span class="status-check" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5c0 4.5-2.8 7.6-7 10-4.2-2.4-7-5.5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg></span>
         <span>Account verified</span>
         <span class="status-plus">+</span>
         <span>Eligible deposit</span>
@@ -1391,16 +1407,14 @@
           <strong>Need help registering?</strong>
           <span>Contact Admin Kila on WhatsApp</span>
         </span>
-        <span class="support-contact-mark" aria-hidden="true">◆</span>
+        <span class="support-contact-mark" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 4 6 8-6 8-6-8 6-8Z"/></svg></span>
       </a>
 
       <!-- SECURITY -->
 
       <div class="security-note">
 
-        <div class="security-icon">
-          ♢
-        </div>
+        <div class="security-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5c0 4.5-2.8 7.6-7 10-4.2-2.4-7-5.5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg></div>
 
         <div>
           <strong>Your details stay private.</strong>
@@ -1458,7 +1472,7 @@
         <h1>Registration is currently closed.</h1>
         <p>SYAF Movement is currently welcoming verified Education Basic Access members.</p>
         <div class="closed-access-note">Already approved after your eligible US$100 deposit? Check your access below.</div>
-        <button class="primary-button" onclick="showLearningMessage()">Check Education Basic Access <span class="button-arrow" aria-hidden="true">→</span></button>
+        <button class="primary-button" onclick="showLearningMessage()">Check Education Basic Access <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span></button>
         <button class="outline-button" onclick="showCircleAccess()">Check SYAF JOURNEY Access</button>
       </section>
 
@@ -1475,7 +1489,7 @@
           <strong>Need help?</strong>
           <span>Contact Admin Kila on WhatsApp</span>
         </span>
-        <span class="support-contact-mark" aria-hidden="true">◆</span>
+        <span class="support-contact-mark" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 4 6 8-6 8-6-8 6-8Z"/></svg></span>
       </a>
 
       <footer class="footer learning-footer">
@@ -1573,9 +1587,7 @@
           <button
             class="broker-arrow"
             onclick="goToStep(2)"
-          >
-            →
-          </button>
+          ><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></button>
 
         </div>
 
@@ -1708,9 +1720,7 @@
           class="option-arrow option-new-arrow"
           onclick="newAccount()"
           aria-label="Create new account"
-        >
-          →
-        </button>
+        ><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></button>
 
       </div>
 
@@ -1736,9 +1746,7 @@
           class="option-arrow option-existing-arrow"
           onclick="existingAccount()"
           aria-label="Existing account"
-        >
-          →
-        </button>
+        ><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></button>
 
       </div>
 
@@ -1827,13 +1835,13 @@
         <p>Your member resources are ready. Choose where you would like to continue.</p>
         <div class="resource-links">
           <a class="resource-link" href="https://syafOfficial.github.io/MillionKids-E-Book/" target="_blank" rel="noopener noreferrer">
-            <span>Access E-Book Basic</span><span class="resource-diamond" aria-hidden="true">◆</span>
+            <span>Access E-Book Basic</span><span class="resource-diamond" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 4 6 8-6 8-6-8 6-8Z"/></svg></span>
           </a>
           <a class="resource-link" href="https://chat.whatsapp.com/CtFke6QLrfrDYqv2rMU2wv" target="_blank" rel="noopener noreferrer">
-            <span>Access WhatsApp Support</span><span class="resource-diamond" aria-hidden="true">◆</span>
+            <span>Access WhatsApp Support</span><span class="resource-diamond" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 4 6 8-6 8-6-8 6-8Z"/></svg></span>
           </a>
           <a class="resource-link" href="https://t.me/PNTHERFX" target="_blank" rel="noopener noreferrer">
-            <span>Access Telegram Signal</span><span class="resource-diamond" aria-hidden="true">◆</span>
+            <span>Access Telegram Signal</span><span class="resource-diamond" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 4 6 8-6 8-6-8 6-8Z"/></svg></span>
           </a>
         </div>
         <section class="indicator-request" aria-label="Education Basic Access indicator request">
@@ -1844,7 +1852,7 @@
             <input id="basicIndicatorClientId" type="text" autocomplete="off" placeholder="Client ID">
             <input id="basicIndicatorTradingView" type="text" autocapitalize="none" autocomplete="username" placeholder="TradingView Username">
           </div>
-          <button type="button" class="primary-button" onclick="requestIndicatorAccess('basic')">Request Indicator on WhatsApp <span class="button-arrow" aria-hidden="true">→</span></button>
+          <button type="button" class="primary-button" onclick="requestIndicatorAccess('basic')">Request Indicator on WhatsApp <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span></button>
           <p id="basicIndicatorMessage" class="indicator-message" role="status"></p>
         </section>
       </section>
@@ -1862,7 +1870,7 @@
           <strong>Need help registering?</strong>
           <span>Contact Admin Kila on WhatsApp</span>
         </span>
-        <span class="support-contact-mark" aria-hidden="true">◆</span>
+        <span class="support-contact-mark" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 4 6 8-6 8-6-8 6-8Z"/></svg></span>
       </a>
 
       <footer class="footer learning-footer">
@@ -1917,19 +1925,19 @@
         <p>Your Circle benefits are active. Education Basic Access remains available too.</p>
         <div class="resource-links">
           <a class="resource-link" href="https://syafOfficial.github.io/MillionKids-E-Book/" target="_blank" rel="noopener noreferrer">
-            <span>Access E-Book Basic–Advanced</span><span class="resource-diamond" aria-hidden="true">◆</span>
+            <span>Access E-Book Basic–Advanced</span><span class="resource-diamond" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 4 6 8-6 8-6-8 6-8Z"/></svg></span>
           </a>
           <a class="resource-link" href="https://syafOfficial.github.io/LegacyPantherEBook/" target="_blank" rel="noopener noreferrer">
-            <span>Access Masterclass E-Book</span><span class="resource-diamond" aria-hidden="true">◆</span>
+            <span>Access Masterclass E-Book</span><span class="resource-diamond" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 4 6 8-6 8-6-8 6-8Z"/></svg></span>
           </a>
           <a class="resource-link" href="https://chat.whatsapp.com/FpZ5bcKpG3SFJOpucKRH7A" target="_blank" rel="noopener noreferrer">
-            <span>Access Trading Circle Journey</span><span class="resource-diamond" aria-hidden="true">◆</span>
+            <span>Access Trading Circle Journey</span><span class="resource-diamond" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 4 6 8-6 8-6-8 6-8Z"/></svg></span>
           </a>
           <a class="resource-link" href="https://t.me/PNTHERFX" target="_blank" rel="noopener noreferrer">
-            <span>Access Telegram Signal</span><span class="resource-diamond" aria-hidden="true">◆</span>
+            <span>Access Telegram Signal</span><span class="resource-diamond" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 4 6 8-6 8-6-8 6-8Z"/></svg></span>
           </a>
           <a class="resource-link" href="https://chat.whatsapp.com/CtFke6QLrfrDYqv2rMU2wv" target="_blank" rel="noopener noreferrer">
-            <span>Access Group Support</span><span class="resource-diamond" aria-hidden="true">◆</span>
+            <span>Access Group Support</span><span class="resource-diamond" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 4 6 8-6 8-6-8 6-8Z"/></svg></span>
           </a>
         </div>
         <section class="indicator-request" aria-label="SYAF JOURNEY indicator request">
@@ -1940,7 +1948,7 @@
             <input id="circleIndicatorClientId" type="text" autocomplete="off" placeholder="Client ID">
             <input id="circleIndicatorTradingView" type="text" autocapitalize="none" autocomplete="username" placeholder="TradingView Username">
           </div>
-          <button type="button" class="primary-button" onclick="requestIndicatorAccess('circle')">Request Indicator on WhatsApp <span class="button-arrow" aria-hidden="true">→</span></button>
+          <button type="button" class="primary-button" onclick="requestIndicatorAccess('circle')">Request Indicator on WhatsApp <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span></button>
           <p id="circleIndicatorMessage" class="indicator-message" role="status"></p>
         </section>
       </section>
@@ -1955,7 +1963,7 @@
           </svg>
         </span>
         <span class="support-contact-copy"><strong>Need help?</strong><span>Contact Admin Kila on WhatsApp</span></span>
-        <span class="support-contact-mark" aria-hidden="true">◆</span>
+        <span class="support-contact-mark" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 4 6 8-6 8-6-8 6-8Z"/></svg></span>
       </a>
 
       <footer class="footer learning-footer">
@@ -2007,14 +2015,14 @@
           <li>Follow the checks and complete your connection request.</li>
         </ol>
         <p>Your progress through this guide stays in this Mini App.</p>
-        <button class="primary-button" onclick="showGuide(1)">Already finished? Complete my application <span class="button-arrow" aria-hidden="true">→</span></button>
+        <button class="primary-button" onclick="showGuide(1)">Already finished? Complete my application <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span></button>
       </section>
 
       <button class="vestrado-open-button" onclick="openVestrado()">
-        Open Account Vestrado <span class="account-action-mark" aria-hidden="true">◆</span>
+        Open Account Vestrado <span class="account-action-mark" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span>
       </button>
 
-      <div class="ib-confirmation">◇ Confirm your account is under SYAF Movement's IB <strong>125579</strong>.</div>
+      <div class="ib-confirmation"><span class="ib-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5c0 4.5-2.8 7.6-7 10-4.2-2.4-7-5.5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg></span> Confirm your account is under SYAF Movement's IB <strong>125579</strong>.</div>
 
       <footer class="footer account-footer">
         <div class="footer-logo">SM</div>
@@ -2067,11 +2075,11 @@ Kindly reassign my wallet to be under IB 125579.
 Referral link: https://my.vestrado.asia/links/go/2687
 Reason I want to join his team.
 Thank you.</textarea>
-        <button class="primary-button" type="button" onclick="saveJourneyState('existing'); window.open('https://my.vestrado.com/help-desk/new/','_blank','noopener')">Open Vestrado ticket <span class="button-arrow" aria-hidden="true">→</span></button>
+        <button class="primary-button" type="button" onclick="saveJourneyState('existing'); window.open('https://my.vestrado.com/help-desk/new/','_blank','noopener')">Open Vestrado ticket <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span></button>
         <button class="outline-button" type="button" onclick="continueExistingVerification()">I requested my IB change — continue to verification</button>
       </section>
 
-      <div class="ib-confirmation">◇ Your existing account must be linked under SYAF Movement's IB <strong>125579</strong>.</div>
+      <div class="ib-confirmation"><span class="ib-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5c0 4.5-2.8 7.6-7 10-4.2-2.4-7-5.5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg></span> Your existing account must be linked under SYAF Movement's IB <strong>125579</strong>.</div>
 
       <footer class="footer account-footer">
         <div class="footer-logo">SM</div>
@@ -2107,7 +2115,7 @@ Thank you.</textarea>
       </div>
 
       <div class="guide-top-actions">
-        <button id="guideOpenAccountButton" class="vestrado-open-button guide-open-button" onclick="openVestrado()">Open Account Vestrado <span class="account-action-mark" aria-hidden="true">◆</span></button>        <div class="ib-confirmation">◇ Confirm your account is under SYAF Movement's IB <strong>125579</strong>.</div>
+        <button id="guideOpenAccountButton" class="vestrado-open-button guide-open-button" onclick="openVestrado()">Open Account Vestrado <span class="account-action-mark" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span></button>        <div class="ib-confirmation"><span class="ib-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5c0 4.5-2.8 7.6-7 10-4.2-2.4-7-5.5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg></span> Confirm your account is under SYAF Movement's IB <strong>125579</strong>.</div>
       </div>
 
       <section class="account-reminder-card registration-guide-card">
@@ -2131,7 +2139,7 @@ Thank you.</textarea>
         </div>
 
         <div class="guide-visual">
-          <div id="guideIcon" class="guide-icon" aria-hidden="true">↗</div>
+          <div id="guideIcon" class="guide-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></div>
           <div id="guideStepLabel" class="guide-step-label">STEP 01</div>
           <h1 id="guideVisualTitle">Premium · USD</h1>
         </div>
@@ -2139,11 +2147,11 @@ Thank you.</textarea>
         <h2 id="guideTitle" class="guide-title">Check your Vestrado account</h2>
         <p id="guideDescription" class="guide-description"></p>
 
-        <button id="guideNextButton" class="primary-button guide-next-button" onclick="nextGuideStep()">Next <span class="button-arrow" aria-hidden="true">→</span></button>
+        <button id="guideNextButton" class="primary-button guide-next-button" onclick="nextGuideStep()">Next <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span></button>
         <button id="guidePreviousButton" class="guide-previous-button" onclick="previousGuideStep()">Previous step</button>
       </section>
 
-      <button class="guide-finished-link" onclick="showRegistration('guide')">I completed registration and deposit — continue to verification <span aria-hidden="true">→</span></button>
+      <button class="guide-finished-link" onclick="showRegistration('guide')">I completed registration and deposit — continue to verification <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span></button>
 
       <footer class="footer account-footer">
         <div class="footer-logo">SM</div>
@@ -2205,7 +2213,7 @@ Thank you.</textarea>
           <textarea id="coachingGoal" required placeholder="What would you like help with?"></textarea>
         </label>
         <p class="registration-note">When you tap the button, your request opens in WhatsApp for you to review and send to Admin Kila.</p>
-        <button class="primary-button" type="submit">Send coaching request <span class="button-arrow" aria-hidden="true">→</span></button>
+        <button class="primary-button" type="submit">Send coaching request <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span></button>
         <p id="coachingMessage" class="form-message" role="status"></p>
       </form>
       <footer class="footer learning-footer">
@@ -2270,7 +2278,7 @@ Thank you.</textarea>
           </select>
         </label>
         <p id="registrationNote" class="registration-note">We use these details only to verify your Education Basic Access. Never enter your Vestrado password.</p>
-        <button id="applicationSubmitButton" class="primary-button" type="submit">Submit for verification <span class="button-arrow" aria-hidden="true">→</span></button>
+        <button id="applicationSubmitButton" class="primary-button" type="submit">Submit for verification <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span></button>
         <p id="applicationMessage" class="form-message" role="status"></p>
       </form>
 
@@ -2299,7 +2307,7 @@ Thank you.</textarea>
         <div class="eyebrow">ACCOUNT CONNECTION</div>
         <h1>Your setup is ready.</h1>
         <p>Return once your Vestrado account is active, linked under SYAF Movement's IB 125579, and has reached US$300 in completed deposits.</p>
-        <button class="primary-button" onclick="goHome()">Back to home <span class="button-arrow" aria-hidden="true">→</span></button>
+        <button class="primary-button" onclick="goHome()">Back to home <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span></button>
       </div>
 
       <footer class="footer account-footer">
@@ -2506,8 +2514,8 @@ Thank you.</textarea>
       }).join("");
       document.getElementById("guidePreviousButton").disabled = activeGuideStep === 0;
       document.getElementById("guideNextButton").innerHTML = activeGuideStep === guideSteps.length - 1
-        ? 'Continue to Step 04 <span class="button-arrow" aria-hidden="true">→</span>'
-        : 'Next <span class="button-arrow" aria-hidden="true">→</span>';
+        ? 'Continue to Step 04 <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span>'
+        : 'Next <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span>';
     }
 
     function showGuide(stepNumber) {
@@ -2810,7 +2818,7 @@ Thank you.</textarea>
       document.getElementById("registrationTitle").textContent = isCircle ? "Apply for SYAF JOURNEY CIRCLE." : "Complete your Education Basic verification.";
       document.getElementById("registrationIntro").textContent = isCircle ? "Submit your details after creating your Vestrado account and completing an eligible US$300 deposit." : "Submit your details after creating your Vestrado account and completing an eligible US$100 deposit.";
       document.getElementById("registrationNote").textContent = isCircle ? "Tell us your total completed Vestrado deposit in USD. SYAF Movement verifies it before approving US$300 SYAF JOURNEY CIRCLE access. Never enter your Vestrado password." : "Tell us your total completed Vestrado deposit in USD. SYAF Movement verifies it before approving US$100 Education Basic Access. Never enter your Vestrado password.";
-      document.getElementById("applicationSubmitButton").innerHTML = isCircle ? 'Apply for SYAF JOURNEY CIRCLE <span class="button-arrow" aria-hidden="true">→</span>' : 'Submit for Education Basic verification <span class="button-arrow" aria-hidden="true">→</span>';
+      document.getElementById("applicationSubmitButton").innerHTML = isCircle ? 'Apply for SYAF JOURNEY CIRCLE <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span>' : 'Submit for Education Basic verification <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span>';
     }
 
     function resumeSavedJourney() {
