@@ -2077,7 +2077,7 @@ Kindly reassign my wallet to be under IB 125579.
 Referral link: https://my.vestrado.asia/links/go/2687
 Reason I want to join his team.
 Thank you.</textarea>
-        <button class="primary-button" type="button" onclick="saveJourneyState('existing'); window.open('https://my.vestrado.com/help-desk/new/','_blank','noopener')">Open Vestrado ticket <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span></button>
+        <button class="primary-button" type="button" onclick="saveJourneyState('existing', 1, true); window.open('https://my.vestrado.com/help-desk/new/','_blank','noopener')">Open Vestrado ticket <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span></button>
         <button class="outline-button" type="button" onclick="continueExistingVerification()">I requested my IB change — continue to verification</button>
       </section>
 
@@ -2468,13 +2468,14 @@ Thank you.</textarea>
       requestedAccess = access === "journey_circle" ? "journey_circle" : "education_basic";
     }
 
-    function saveJourneyState(screen, step) {
+    function saveJourneyState(screen, step, resumeAfterExternal) {
       try {
         localStorage.setItem(JOURNEY_STATE_KEY, JSON.stringify({
           screen: screen,
           step: step || 1,
           accountFlow: accountFlow,
-          requestedAccess: requestedAccess
+          requestedAccess: requestedAccess,
+          resumeAfterExternal: Boolean(resumeAfterExternal)
         }));
       } catch (_) {}
     }
@@ -2551,7 +2552,7 @@ Thank you.</textarea>
     }
 
     function openVestrado() {
-      saveJourneyState("guide", activeGuideStep + 1);
+      saveJourneyState("guide", activeGuideStep + 1, true);
       window.open("https://my.vestrado.com/links/go/2687", "_blank", "noopener");
     }
 
@@ -2826,7 +2827,10 @@ Thank you.</textarea>
     function resumeSavedJourney() {
       let saved;
       try { saved = JSON.parse(localStorage.getItem(JOURNEY_STATE_KEY)); } catch (_) { return false; }
-      if (!saved || !saved.screen) return false;
+      if (!saved || !saved.screen || !saved.resumeAfterExternal) return false;
+      try {
+        localStorage.setItem(JOURNEY_STATE_KEY, JSON.stringify(Object.assign({}, saved, { resumeAfterExternal: false })));
+      } catch (_) {}
       accountFlow = saved.accountFlow === "existing" ? "existing" : "new";
       setJourneyIntent(saved.requestedAccess);
       if (saved.screen === "existing") {
