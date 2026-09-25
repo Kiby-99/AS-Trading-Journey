@@ -1382,6 +1382,16 @@
       </div>
 
 
+      <!-- EXISTING MEMBER CLAIM -->
+      <div class="card">
+        <div class="icon-box icon-gold" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 3 19 6v5c0 4.5-2.8 7.6-7 10-4.2-2.4-7-5.5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <h2 class="learning-title">Already deposited with SYAF?</h2>
+        <p class="learning-description">Claim your Education Basic or SYAF Journey Circle access. We will verify your Client ID and completed deposit.</p>
+        <button class="outline-button" onclick="startExistingMemberClaim()">Claim my member access <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span></button>
+      </div>
+
       <!-- PERSONAL COACHING -->
       <div class="card coaching-card">
         <div class="icon-box icon-gold" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l1.4 4.6L18 9l-4.6 1.4L12 15l-1.4-4.6L6 9l4.6-1.4L12 3Z"/><path d="M19 15l.7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15Z"/></svg></div>
@@ -2255,6 +2265,12 @@ Thank you.</textarea>
       <p id="registrationIntro" class="learning-page-intro">Submit your details after creating your Vestrado account and completing an eligible US$100 deposit.</p>
 
       <form id="memberApplicationForm" class="registration-card" onsubmit="submitApplication(event)">
+        <label id="claimAccessLabel" hidden>Access to claim
+          <select id="claimAccessTier" onchange="setClaimAccessTier(this.value)">
+            <option value="education_basic">Education Basic Access — US$100+</option>
+            <option value="journey_circle">SYAF Journey Circle — US$300+</option>
+          </select>
+        </label>
         <label>Phone number
           <input id="applicationPhone" type="tel" autocomplete="tel" required placeholder="+60 12 345 6789">
         </label>
@@ -2490,6 +2506,13 @@ Thank you.</textarea>
       setJourneyIntent("journey_circle");
       saveJourneyState("guide", 1);
       showGuide(1);
+    }
+
+    function startExistingMemberClaim() {
+      if (!registrationOpen) { showClosedAccess(); return; }
+      accountFlow = "existing";
+      setJourneyIntent("education_basic");
+      showRegistration("claim");
     }
 
     function continueExistingVerification() {
@@ -2814,14 +2837,33 @@ Thank you.</textarea>
     }
 
     let registrationReturn = "learning";
+    let registrationSource = "learning";
 
     function applyRegistrationCopy() {
       const isCircle = requestedAccess === "journey_circle";
+      const isClaim = registrationSource === "claim";
+      const claimLabel = document.getElementById("claimAccessLabel");
+      const claimTier = document.getElementById("claimAccessTier");
+      if (claimLabel) claimLabel.hidden = !isClaim;
+      if (claimTier) claimTier.value = requestedAccess;
+      if (isClaim) {
+        document.getElementById("registrationEyebrow").textContent = "EXISTING MEMBER ACCESS CLAIM";
+        document.getElementById("registrationTitle").textContent = "Claim your SYAF member access.";
+        document.getElementById("registrationIntro").textContent = "Already deposited with SYAF? Submit your Client ID and completed deposit so we can verify and unlock the right access level.";
+        document.getElementById("registrationNote").textContent = "Choose the access level you believe you qualify for. SYAF Movement will verify your Vestrado Client ID and completed deposit before approval. Never enter your Vestrado password.";
+        document.getElementById("applicationSubmitButton").innerHTML = 'Submit member access claim <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span>';
+        return;
+      }
       document.getElementById("registrationEyebrow").textContent = isCircle ? "STEP 04 · SYAF JOURNEY CIRCLE VERIFICATION" : "STEP 04 · EDUCATION BASIC VERIFICATION";
       document.getElementById("registrationTitle").textContent = isCircle ? "Apply for SYAF JOURNEY CIRCLE." : "Complete your Education Basic verification.";
       document.getElementById("registrationIntro").textContent = isCircle ? "Submit your details after creating your Vestrado account and completing an eligible US$300 deposit." : "Submit your details after creating your Vestrado account and completing an eligible US$100 deposit.";
       document.getElementById("registrationNote").textContent = isCircle ? "Tell us your total completed Vestrado deposit in USD. SYAF Movement verifies it before approving US$300 SYAF JOURNEY CIRCLE access. Never enter your Vestrado password." : "Tell us your total completed Vestrado deposit in USD. SYAF Movement verifies it before approving US$100 Education Basic Access. Never enter your Vestrado password.";
       document.getElementById("applicationSubmitButton").innerHTML = isCircle ? 'Apply for SYAF JOURNEY CIRCLE <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span>' : 'Submit for Education Basic verification <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span>';
+    }
+
+    function setClaimAccessTier(access) {
+      setJourneyIntent(access);
+      applyRegistrationCopy();
     }
 
     function resumeSavedJourney() {
@@ -2859,7 +2901,8 @@ Thank you.</textarea>
         alert("Please open this Mini App from Telegram to submit your application.");
         return;
       }
-      registrationReturn = source === "guide" ? "guide" : source === "existing" ? "existing" : "learning";
+      registrationSource = source || "learning";
+      registrationReturn = source === "guide" ? "guide" : source === "existing" ? "existing" : source === "claim" ? "home" : "learning";
       applyRegistrationCopy();
       saveJourneyState("registration");
       hideAllScreens();
@@ -2876,6 +2919,10 @@ Thank you.</textarea>
         hideAllScreens();
         document.getElementById("existingAccountScreen").classList.add("active");
         window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+      if (registrationReturn === "home") {
+        goHome();
         return;
       }
       showLearningMessage();
@@ -2897,7 +2944,7 @@ Thank you.</textarea>
           requestedAccess: requestedAccess
         });
         const isCircle = requestedAccess === "journey_circle";
-        setApplicationMessage(isCircle ? "Submitted for SYAF JOURNEY CIRCLE. Your application is pending verification." : "Submitted for Education Basic Access. Your application is pending verification.", false);
+        setApplicationMessage(registrationSource === "claim" ? "Your member access claim is pending verification." : isCircle ? "Submitted for SYAF JOURNEY CIRCLE. Your application is pending verification." : "Submitted for Education Basic Access. Your application is pending verification.", false);
         clearJourneyState();
         if (isCircle) renderCircleAccess(result.application); else renderMemberAccess(result.application);
         setTimeout(isCircle ? showCircleAccess : showLearningMessage, 900);
