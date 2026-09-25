@@ -1252,6 +1252,41 @@
     .account-action-mark { width: 15px; height: 15px; }
     .status-check, .security-icon, .ib-icon { width: 17px; height: 17px; }
 
+    /* Clean home navigation — details live on focused screens. */
+    .home-paths { display: grid; gap: 11px; margin: 23px 0 16px; }
+    .home-path-card {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 14px;
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: linear-gradient(145deg, #191919, #101010);
+      color: var(--text);
+      text-align: left;
+    }
+    .home-path-card:active { background: #211f17; transform: scale(.99); }
+    .home-path-card.is-featured { border-color: rgba(212, 175, 90, .62); background: linear-gradient(145deg, #201c12, #11100d); }
+    .home-path-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
+      border: 1px solid rgba(212, 175, 90, .48);
+      border-radius: 13px;
+      background: rgba(212, 175, 90, .08);
+      color: var(--gold-bright);
+    }
+    .home-path-icon svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .home-path-copy { flex: 1; min-width: 0; }
+    .home-path-copy strong, .home-path-copy span { display: block; }
+    .home-path-copy strong { color: var(--text); font-size: 15px; line-height: 1.3; }
+    .home-path-copy span { margin-top: 3px; color: var(--muted); font-size: 12px; line-height: 1.35; }
+    .home-path-mark { color: var(--gold-bright); font-size: 20px; line-height: 1; }
+
   </style>
 </head>
 
@@ -1298,110 +1333,36 @@
         Your journey starts here.
       </h1>
 
-
-      <!-- CONNECT ACCOUNT -->
-
-      <div class="card primary-journey-card">
-
-        <div class="broker-mark" aria-hidden="true">V</div>
-
-        <h2 class="card-title">
-          Connect your Vestrado account
-        </h2>
-
-        <p class="card-description">
-          Connect your account and complete an eligible deposit from US$100 to begin your SM access.
-        </p>
-
-        <button
-          class="primary-button"
-          onclick="goToStep(1)"
-        >
-          Connect my account <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span>
+      <div class="home-paths" aria-label="Choose your SYAF Movement path">
+        <button class="home-path-card is-featured" onclick="goToStep(1)">
+          <span class="home-path-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7.5V6a2 2 0 0 1 2-2h11v4"/><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M16 13h2"/></svg></span>
+          <span class="home-path-copy"><strong>Start with Vestrado</strong><span>Create or link your Vestrado account.</span></span>
+          <span class="home-path-mark" aria-hidden="true">›</span>
         </button>
 
-      </div>
-
-
-      <!-- STATUS -->
-
-      <div class="status-line journey-status">
-        <span class="status-check" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5c0 4.5-2.8 7.6-7 10-4.2-2.4-7-5.5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg></span>
-        <span>Account verified</span>
-        <span class="status-plus">+</span>
-        <span>Eligible deposit</span>
-      </div>
-
-
-      <!-- ACCESS -->
-
-      <div class="card unlock-journey-card">
-
-        <div class="unlock-card-title">
-          <span class="lock-mark" aria-hidden="true"></span>
-          <h2 class="card-title">Unlock Journey with SM</h2>
-        </div>
-
-        <p class="card-description">
-          Connect, verify, and deposit US$300 to unlock your SYAF JOURNEY CIRCLE access.
-        </p>
-
-        <button
-          class="gold-button"
-          onclick="showCircleAccess()"
-        >
-          Unlock Journey access <span class="button-lock" aria-hidden="true"></span>
+        <button class="home-path-card" onclick="showLearningMessage()">
+          <span class="home-path-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5c2.4-1.1 5.2-.8 8 1v12c-2.8-1.8-5.6-2.1-8-1V5.5Z"/><path d="M20 5.5c-2.4-1.1-5.2-.8-8 1v12c2.8-1.8 5.6-2.1 8-1V5.5Z"/></svg></span>
+          <span class="home-path-copy"><strong>Education Basic Access</strong><span>Core learning for verified US$100+ members.</span></span>
+          <span class="home-path-mark" aria-hidden="true">›</span>
         </button>
 
-      </div>
-
-
-      <!-- LEARNING -->
-
-      <div class="card">
-
-        <div class="icon-box icon-gold" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M4 5.5c2.4-1.1 5.2-.8 8 1v12c-2.8-1.8-5.6-2.1-8-1V5.5Z"/><path d="M20 5.5c-2.4-1.1-5.2-.8-8 1v12c2.8-1.8 5.6-2.1 8-1V5.5Z"/></svg>
-        </div>
-
-        <h2 class="learning-title">
-          Education Basic Access
-        </h2>
-
-        <p class="learning-description">
-          Access core trading lessons and guided practice once your eligible deposit is verified.
-        </p>
-
-        <button
-          class="outline-button"
-          onclick="showLearningMessage()"
-        >
-          View Education Basic Access&nbsp; →
+        <button class="home-path-card is-featured" onclick="showCircleAccess()">
+          <span class="home-path-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 19 6v5c0 4.5-2.8 7.6-7 10-4.2-2.4-7-5.5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+          <span class="home-path-copy"><strong>Unlock SYAF Journey Circle</strong><span>Circle access for verified US$300+ members.</span></span>
+          <span class="home-path-mark" aria-hidden="true">›</span>
         </button>
 
-      </div>
+        <button class="home-path-card" onclick="startExistingMemberClaim()">
+          <span class="home-path-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 19 6v5c0 4.5-2.8 7.6-7 10-4.2-2.4-7-5.5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+          <span class="home-path-copy"><strong>Already deposited with SYAF?</strong><span>Claim your verified member access.</span></span>
+          <span class="home-path-mark" aria-hidden="true">›</span>
+        </button>
 
-
-      <!-- EXISTING MEMBER CLAIM -->
-      <div class="card">
-        <div class="icon-box icon-gold" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M12 3 19 6v5c0 4.5-2.8 7.6-7 10-4.2-2.4-7-5.5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
-        </div>
-        <h2 class="learning-title">Already deposited with SYAF?</h2>
-        <p class="learning-description">Claim your Education Basic or SYAF Journey Circle access. We will verify your Client ID and completed deposit.</p>
-        <button class="outline-button" onclick="startExistingMemberClaim()">Claim my member access <span class="button-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13"/><path d="m13 7 5 5-5 5"/></svg></span></button>
-      </div>
-
-      <!-- PERSONAL COACHING -->
-      <div class="card coaching-card">
-        <div class="icon-box icon-gold" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l1.4 4.6L18 9l-4.6 1.4L12 15l-1.4-4.6L6 9l4.6-1.4L12 3Z"/><path d="M19 15l.7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15Z"/></svg></div>
-        <h2>Personal Coaching</h2>
-        <p>Choose a private coaching path designed around your current experience and trading goals.</p>
-        <div class="coaching-package-list">
-          <div class="coaching-package-item">Basic Package — RM 2,000<span>2 coaching sessions · E-Book Basic · Indicator · VIP group</span></div>
-          <div class="coaching-package-item">Basic to Advanced Package — RM 3,500<span>3 coaching sessions · E-Book Basic to Advanced + Masterclass · Indicator · VIP group</span></div>
-        </div>
-        <button class="outline-button" onclick="showCoaching()">Explore Personal Coaching&nbsp; ◆</button>
+        <button class="home-path-card" onclick="showCoaching()">
+          <span class="home-path-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l1.4 4.6L18 9l-4.6 1.4L12 15l-1.4-4.6L6 9l4.6-1.4L12 3Z"/><path d="M19 15l.7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15Z"/></svg></span>
+          <span class="home-path-copy"><strong>Personal Coaching</strong><span>Explore private coaching packages.</span></span>
+          <span class="home-path-mark" aria-hidden="true">›</span>
+        </button>
       </div>
 
       <!-- MAIN PAGE SUPPORT -->
@@ -2963,17 +2924,3 @@ Thank you.</textarea>
 
 </body>
 </html>
-
-
-<style>
-/* Compact home navigation: each option opens its own focused screen. */
-#homeScreen .journey-status { display: none; }
-#homeScreen .card { display:flex; align-items:center; gap:13px; min-height:76px; margin-bottom:10px; padding:14px; border-radius:16px; }
-#homeScreen .card .broker-mark, #homeScreen .card .icon-box { width:42px; height:42px; flex:0 0 auto; margin:0; border-radius:13px; }
-#homeScreen .card .card-title, #homeScreen .card .learning-title, #homeScreen .coaching-card h2 { flex:1; margin:0; color:var(--text); font-size:15px; line-height:1.3; }
-#homeScreen .card .card-description, #homeScreen .card .learning-description, #homeScreen .coaching-card p, #homeScreen .coaching-package-list, #homeScreen .coaching-card::before { display:none; }
-#homeScreen .card .primary-button, #homeScreen .card .gold-button, #homeScreen .card .outline-button { width:42px; min-width:42px; min-height:42px; padding:0; border-radius:50%; font-size:0; }
-#homeScreen .card .primary-button::after, #homeScreen .card .gold-button::after, #homeScreen .card .outline-button::after { content:"›"; color:currentColor; font-size:26px; font-weight:400; line-height:1; }
-#homeScreen .card .button-arrow, #homeScreen .card .button-lock { display:none; }
-#homeScreen .coaching-card { margin-top:0; background:linear-gradient(145deg,#1e1b12,#0f0f0e); }
-</style>
