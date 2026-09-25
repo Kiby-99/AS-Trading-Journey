@@ -2963,3 +2963,17 @@ Thank you.</textarea>
 
 </body>
 </html>
+
+
+<style>
+/* Compact home navigation: each option opens its own focused screen. */
+#homeScreen .journey-status { display: none; }
+#homeScreen .card { display:flex; align-items:center; gap:13px; min-height:76px; margin-bottom:10px; padding:14px; border-radius:16px; }
+#homeScreen .card .broker-mark, #homeScreen .card .icon-box { width:42px; height:42px; flex:0 0 auto; margin:0; border-radius:13px; }
+#homeScreen .card .card-title, #homeScreen .card .learning-title, #homeScreen .coaching-card h2 { flex:1; margin:0; color:var(--text); font-size:15px; line-height:1.3; }
+#homeScreen .card .card-description, #homeScreen .card .learning-description, #homeScreen .coaching-card p, #homeScreen .coaching-package-list, #homeScreen .coaching-card::before { display:none; }
+#homeScreen .card .primary-button, #homeScreen .card .gold-button, #homeScreen .card .outline-button { width:42px; min-width:42px; min-height:42px; padding:0; border-radius:50%; font-size:0; }
+#homeScreen .card .primary-button::after, #homeScreen .card .gold-button::after, #homeScreen .card .outline-button::after { content:"›"; color:currentColor; font-size:26px; font-weight:400; line-height:1; }
+#homeScreen .card .button-arrow, #homeScreen .card .button-lock { display:none; }
+#homeScreen .coaching-card { margin-top:0; background:linear-gradient(145deg,#1e1b12,#0f0f0e); }
+</style>
